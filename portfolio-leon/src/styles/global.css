@@ -1,4 +1,20 @@
 /* Navigation */
+    body {
+            margin: 0;
+            padding: 0;
+            /* Background image settings */
+            background-image: url('/public/background11.png');
+            background-size: cover; /* or 'contain' depending on your needs */
+            background-position: center center;
+            background-attachment: fixed; /* This makes it stay in place */
+            background-repeat: no-repeat;
+            
+            /* Fallback background color */
+            background-color: #000000;
+            
+            /* Additional styling */
+            font-family: Arial, sans-serif;
+        }
 
 .nav {
     display: flex;
@@ -41,5 +57,91 @@
 }
 
 .nav-link.active {
+    color: var(--primary);
+}
+
+
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6rem;
+    padding: 4rem 2rem;
+}
+
+/* HERO */
+.hero {
+    text-align: center;
+}
+
+.hero-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.hero h1 {
+    font-size: 3rem;
+    line-height: 1.2;
+}
+
+.hero h1 span {
+    color: var(--primary);
+}
+
+.hero-subtitle {
+    max-width: 600px;
+    margin-top: 1rem;
+    color: var(--text-muted);
+}
+
+.hero-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+}
+
+/* SKILLS */
+
+.skills-preview ul {
+    margin-top: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.skills-preview li {
+    background: var(--bg-soft);
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+/* CTA */
+
+.cta {
+    background: linear-gradient(135deg,
+            rgba(120, 90, 255, 0.15),
+            rgba(80, 60, 200, 0.15));
+    padding: 3rem;
+    border-radius: 16px;
+    text-align: center;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.btn.primary {
+    background: var(--primary);
+    color: white;
+}
+
+.btn.secondary {
+    border: 1px solid var(--primary);
     color: var(--primary);
 }

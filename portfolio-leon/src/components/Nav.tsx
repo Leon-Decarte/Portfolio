@@ -1,10 +1,10 @@
 import { useEffect, useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";  // Add this import
+import { useNavigate } from "react-router-dom";
 
 function Nav() {
     const navRef = useRef<HTMLElement>(null);
     const [navHeight, setNavHeight] = useState(0);
-    const navigate = useNavigate();  // Add this
+    const navigate = useNavigate();
 
     // Measure nav height on mount
     useEffect(() => {
@@ -20,7 +20,8 @@ function Nav() {
             // On Home: Scroll directly
             const section = document.getElementById(sectionId);
             if (section) {
-                const offsetTop = section.offsetTop - navHeight;
+                // Center the section in the viewport
+                const offsetTop = section.offsetTop + (section.offsetHeight / 2) - (window.innerHeight + navHeight) / 2;
                 window.scrollTo({
                     top: offsetTop,
                     behavior: "smooth",
@@ -70,6 +71,15 @@ function Nav() {
                         className="nav-link"
                     >
                         Projects
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href="#contact"
+                        onClick={(e) => handleScrollToSection("contact", e)}
+                        className="nav-link"
+                    >
+                        Contact
                     </a>
                 </li>
             </ul>

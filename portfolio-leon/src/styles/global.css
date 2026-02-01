@@ -16,6 +16,13 @@
             font-family: Arial, sans-serif;
         }
 
+
+section {
+    background-color: aqua;
+    width: 80vw;
+    height: 80vh;
+}
+
 .nav {
     display: flex;
     justify-content: space-between;
@@ -66,12 +73,12 @@
     flex-direction: column;
     align-items: center;
     gap: 6rem;
-    padding: 4rem 2rem;
 }
 
 /* HERO */
 .hero {
     text-align: center;
+    margin-top: 1.5rem;
 }
 
 .hero-content{

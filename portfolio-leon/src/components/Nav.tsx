@@ -1,74 +1,76 @@
-import { HashLink } from "react-router-hash-link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";  // Add this import
 
 function Nav() {
-    const [activeSection, setActiveSection] = useState("home");
+    const navRef = useRef<HTMLElement>(null);
+    const [navHeight, setNavHeight] = useState(0);
+    const navigate = useNavigate();  // Add this
 
-    // Scrollspy logic using scroll event (more reliable)
+    // Measure nav height on mount
     useEffect(() => {
-        const handleScroll = () => {
-            const sections = document.querySelectorAll("section[id]");
-            let current = "home"; // Default to home
-            sections.forEach((section) => {
-                const rect = section.getBoundingClientRect();
-                // Check if section is in the middle of the viewport
-                if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
-                    current = section.id;
-                }
-            });
-            setActiveSection(current);
-        };
-
-        // Add scroll listener
-        window.addEventListener('scroll', handleScroll);
-        // Run once on mount to set initial active section
-        handleScroll();
-
-        return () => window.removeEventListener('scroll', handleScroll);
+        if (navRef.current) {
+            setNavHeight(navRef.current.offsetHeight);
+        }
     }, []);
 
-    // Check if we're on Home page (for active class)
-    const isHomePage = window.location.pathname === "/";
+    // Handle click: Scroll on Home, navigate + scroll from other pages
+    const handleScrollToSection = (sectionId: string, event: React.MouseEvent) => {
+        event.preventDefault(); // Prevent URL change
+        if (window.location.pathname === "/") {
+            // On Home: Scroll directly
+            const section = document.getElementById(sectionId);
+            if (section) {
+                const offsetTop = section.offsetTop - navHeight;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: "smooth",
+                });
+            }
+        } else {
+            // From other pages: Navigate to Home with section in state
+            navigate("/", { state: { scrollTo: sectionId } });
+        }
+    };
 
     return (
-        <nav className="nav">
+        <nav className="nav" ref={navRef}>
             <div className="nav-logo">Leon</div>
             <ul className="nav-links">
                 <li>
-                    <HashLink
-                        to="/#home"
-                        className={isHomePage && activeSection === "home" ? "nav-link active" : "nav-link"}
-                        smooth
+                    <a
+                        href="#home"
+                        onClick={(e) => handleScrollToSection("home", e)}
+                        className="nav-link"
                     >
                         Home
-                    </HashLink>
+                    </a>
                 </li>
                 <li>
-                    <HashLink
-                        to="/#about"
-                        className={isHomePage && activeSection === "about" ? "nav-link active" : "nav-link"}
-                        smooth
+                    <a
+                        href="#about"
+                        onClick={(e) => handleScrollToSection("about", e)}
+                        className="nav-link"
                     >
                         About
-                    </HashLink>
+                    </a>
                 </li>
                 <li>
-                    <HashLink
-                        to="/#skills"
-                        className={isHomePage && activeSection === "skills" ? "nav-link active" : "nav-link"}
-                        smooth
+                    <a
+                        href="#skills"
+                        onClick={(e) => handleScrollToSection("skills", e)}
+                        className="nav-link"
                     >
                         Skills
-                    </HashLink>
+                    </a>
                 </li>
                 <li>
-                    <HashLink
-                        to="/#projects-preview"
-                        className={isHomePage && activeSection === "projects-preview" ? "nav-link active" : "nav-link"}
-                        smooth
+                    <a
+                        href="#projects-preview"
+                        onClick={(e) => handleScrollToSection("projects-preview", e)}
+                        className="nav-link"
                     >
                         Projects
-                    </HashLink>
+                    </a>
                 </li>
             </ul>
         </nav>

@@ -1,41 +1,48 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import About from "./About";
 import Skills from "./Skills";
+import Hero from "./Hero";
 
 function Home() {
+    const location = useLocation();
+
+    useEffect(() => {
+  // Always start at top
+  window.scrollTo(0, 0);
+
+  if (location.state?.scrollTo) {
+    const section = document.getElementById(location.state.scrollTo);
+
+    if (section) {
+      const navHeight = 60;
+      const offsetTop = section.offsetTop - navHeight;
+
+      setTimeout(() => {
+        window.scrollTo({
+          top: offsetTop,
+          behavior: "smooth",
+        });
+      }, 50);
+    }
+
+    // 🔥 IMPORTANT: clear the state after using it
+    window.history.replaceState({}, document.title);
+  }
+}, [location.key]);
+
+    
+
+
     return (
         <main className="home">
             <section className="hero" id="home">
-                <div className="hero-content">
-                    <h1>
-                        Développeur Front-End
-                        <span> React & TypeScript</span>
-                    </h1>
-
-                    <p className="hero-subtitle">
-                        Je conçois des interfaces modernes, orientées utilisateur,
-                        avec une approche produit et UX.
-                    </p>
-
-                    <p className="hero-subtitle muted">
-                        Actuellement en recherche d’une alternance en développement web.
-                    </p>
-
-                    <div className="hero-actions">
-                        <a href="#projects-preview" className="btn primary">
-                            Voir mes projets
-                        </a>
-
-                        <a href="/contact" className="btn secondary">
-                            Me contacter
-                        </a>
-                    </div>
-                </div>
-
+                <Hero />
                 <div className="hero-visual">
                     <div className="gradient-orb" />
                 </div>
             </section>
-            
+
             <section id="about">
                 <About />
             </section>
@@ -46,7 +53,6 @@ function Home() {
 
             <section id="projects-preview">
                 <h2>Projects</h2>
-                {/* Add 3 project cards here, e.g., <ProjectCard /> components */}
                 <div className="project-cards">
                     <div className="card">Project 1</div>
                     <div className="card">Project 2</div>

@@ -1,19 +1,17 @@
-// filepath: c:\Users\radim\Documents\Mansour\Personal site\portfolio-leon\src\pages\Hero.tsx
 function Hero() {
     return (
         <div className="hero-content">
             <h1>
-                Développeur Front-End
-                <span> React & TypeScript</span>
+                I design interfaces. I build them. I make them feel right.
             </h1>
 
             <p className="hero-subtitle">
-                Je conçois des interfaces modernes, orientées utilisateur,
-                avec une approche produit et UX.
+                Fullstack-oriented developer with a strong UX/UI background, focused on creating clean, intuitive React applications with
+                <span> Java & JavaScript</span>
             </p>
 
             <p className="hero-subtitle muted">
-                Actuellement en recherche d’une alternance en développement web.
+                Looking for an apprenticeship to deepen my skills and contribute to meaningful projects.
             </p>
 
             <div className="hero-actions">

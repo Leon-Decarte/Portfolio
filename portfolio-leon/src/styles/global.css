@@ -18,7 +18,9 @@
 
 
 section {
-    background-color: aqua;
+    border-radius: 1rem;
+    padding: 1rem;
+    background-color: rgba(245, 251, 251, 0.546);
     width: 80vw;
     height: 80vh;
 }

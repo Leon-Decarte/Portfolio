@@ -4,6 +4,7 @@ import About from "./About";
 import Skills from "./Skills";
 import Hero from "./Hero";
 import Contact from "./Contact"; 
+import Projects from "./Projects";
 
 function Home() {
     const location = useLocation();
@@ -52,15 +53,7 @@ function Home() {
             </section>
 
             <section id="projects-preview">
-                <h2>Projects</h2>
-                <div className="project-cards">
-                    <div className="card">Project 1</div>
-                    <div className="card">Project 2</div>
-                    <div className="card">Project 3</div>
-                </div>
-                <button onClick={() => window.location.href = '/projects'} className="btn primary">
-                    Show More
-                </button>
+                <Projects />
             </section>
 
             <section id="contact">

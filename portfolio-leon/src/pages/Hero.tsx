@@ -2,7 +2,7 @@ function Hero() {
     return (
         <div className="hero-content">
             <h1>
-                I design interfaces. I build them. I make them feel right.
+                I listen. I design. I build.
             </h1>
 
             <p className="hero-subtitle">

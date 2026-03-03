@@ -179,12 +179,15 @@ section {
 
 .project-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 2rem;
     margin: 2rem 0;
 }
 
 .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background: rgba(255, 255, 255, 0.8);
     border-radius: 1rem;
     overflow: hidden;
@@ -201,29 +204,31 @@ section {
     width: 100%;
     height: 200px;
     object-fit: cover;
+    object-position: top;
 }
 
 .card-content {
+    height: 250px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
     padding: 1.5rem;
 }
 
 .card-title {
     font-size: 1.3rem;
     font-weight: 600;
-    margin-bottom: 0.5rem;
 }
 
 .card-description {
     font-size: 0.95rem;
     color: var(--text-secondary);
-    margin-bottom: 1rem;
 }
 
 .card-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    margin-bottom: 1rem;
 }
 
 .tag {
@@ -233,6 +238,11 @@ section {
     border-radius: 0.5rem;
     font-size: 0.8rem;
     font-weight: 500;
+}
+
+.card-links {
+    display: flex;
+    gap: 1rem;
 }
 
 /* CONTACT */
@@ -291,6 +301,7 @@ section {
 /* Buttons */
 
 .btn {
+    display: inline-flex; 
     padding: 0.75rem 1.5rem;
     border-radius: 8px;
     text-decoration: none;

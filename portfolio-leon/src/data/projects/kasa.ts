@@ -10,9 +10,9 @@ export const kasaProject: Project = {
         title: "Kasa – Rental Platform",
         description:
             "React application with dynamic routing and reusable components.",
-        image: "/images/kasa/hero.png",
-        demoLink: "https://kasa.vercel.app",
-        githubLink: "https://github.com/username/kasa",
+        image: "src/assets/sportsee/main.png",
+        demoLink: "https://kasa-nine-rho.vercel.app",
+        githubLink: "https://github.com/Leon-Decarte/P11_Kasa",
     },
 
     context:

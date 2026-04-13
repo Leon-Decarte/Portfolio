@@ -3,12 +3,16 @@ import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Projects from "./pages/Projects";
+import FluidCursor from "./components/FluidCursor";
+
 
 function App() {
   
   return (
     
     <BrowserRouter>
+          <FluidCursor />
+
       <Nav />
       <Routes>
         <Route path="/" element={<Home />} />

@@ -1,8 +1,8 @@
 function Hero() {
     return (
         <div className="hero-content">
-            <h1>
-                I listen. I design. I build.
+            <h1 data-text="I LISTEN. I DESIGN. I BUILD.">
+                I LISTEN. <br /> I DESIGN.<br />  I BUILD.
             </h1>
 
             <p className="hero-subtitle">
@@ -10,9 +10,7 @@ function Hero() {
                 <span> Java & JavaScript</span>
             </p>
 
-            <p className="hero-subtitle muted">
-                Looking for an apprenticeship to deepen my skills and contribute to meaningful projects.
-            </p>
+        
 
             <div className="hero-actions">
                 <a href="#projects-preview" className="btn primary">

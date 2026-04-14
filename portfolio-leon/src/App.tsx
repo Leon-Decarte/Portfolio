@@ -4,15 +4,16 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Projects from "./pages/Projects";
 import FluidCursor from "./components/FluidCursor";
-
+import GridBackground from "./components/GridBackground";
+import CursorDot from "./components/CursorDot";
+import DotGrid from "./components/DotGrid";
+import AnimatedDotBackground from "./components/AnimatedDotBackground";
 
 function App() {
   
   return (
-    
     <BrowserRouter>
-          <FluidCursor />
-
+      <AnimatedDotBackground />
       <Nav />
       <Routes>
         <Route path="/" element={<Home />} />

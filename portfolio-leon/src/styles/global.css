@@ -12,6 +12,113 @@
     font-style: normal;
 }
 
+.grid-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+
+    /* SMALLER GRID */
+    background-image:
+        linear-gradient(rgba(139, 61, 255, 0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(139, 61, 255, 0.32) 1px, transparent 1px);
+
+    background-size: 22px 22px;
+    /* 👈 smaller cells */
+
+    /* SMOOTH GRADIENT REVEAL */
+    mask-image: radial-gradient(circle 220px at var(--x) var(--y),
+            rgba(0, 0, 0, 1) 0%,
+            rgba(0, 0, 0, 0.85) 20%,
+            rgba(0, 0, 0, 0.6) 45%,
+            rgba(0, 0, 0, 0.3) 65%,
+            transparent 85%);
+
+    -webkit-mask-image: radial-gradient(circle 220px at var(--x) var(--y),
+            rgba(0, 0, 0, 1) 0%,
+            rgba(0, 0, 0, 0.85) 20%,
+            rgba(0, 0, 0, 0.6) 45%,
+            rgba(0, 0, 0, 0.3) 65%,
+            transparent 85%);
+
+    opacity: 1;
+}
+
+.cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 10px;
+
+    background-color: #8B3DFF;
+    border-radius: 50%;
+
+    pointer-events: none;
+    z-index: 9999;
+
+    transform: translate(-50%, -50%);
+}
+/* Add this to your global CSS or component styles */
+/* This ensures the canvas sits behind your content */
+.canvas-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* If you want content to appear above the dots */
+.content {
+  position: relative;
+  z-index: 1;
+}
+
+
+.dot-grid {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  /* =========================
+     BASE GRID (ALWAYS VISIBLE)
+     ========================= */
+  background-image: radial-gradient(
+    rgba(139, 61, 255, 0.20) 1px,
+    transparent 1.8px
+  );
+
+  background-size: 12px 12px; /* tighter = more modern */
+
+  /* =========================
+     CURSOR ENHANCEMENT LAYER
+     ========================= */
+  mask-image: radial-gradient(
+    circle 140px at var(--x) var(--y),
+    rgba(0, 0, 0, calc(var(--active, 1) * 1)) 0%,
+    rgba(0, 0, 0, calc(var(--active, 1) * 0.9)) 25%,
+    rgba(0, 0, 0, calc(var(--active, 1) * 0.55)) 50%,
+    rgba(0, 0, 0, calc(var(--active, 1) * 0.25)) 70%,
+    transparent 90%
+  );
+
+  -webkit-mask-image: radial-gradient(
+    circle 140px at var(--x) var(--y),
+    rgba(0, 0, 0, calc(var(--active, 1) * 1)) 0%,
+    rgba(0, 0, 0, calc(var(--active, 1) * 0.9)) 25%,
+    rgba(0, 0, 0, calc(var(--active, 1) * 0.55)) 50%,
+    rgba(0, 0, 0, calc(var(--active, 1) * 0.25)) 70%,
+    transparent 90%
+  );
+
+  /* =========================
+     SMOOTH FADE (IMPORTANT FIX)
+     ========================= */
+  transition: opacity 1.2s ease, mask-image 0.8s ease-out;
+
+  opacity: 1;
+}
+
 
 body {
     margin: 0;
@@ -95,7 +202,6 @@ section {
 /* HERO */
 .hero {
     text-align: center;
-    margin-top: 1.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;

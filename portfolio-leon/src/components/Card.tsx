@@ -2,11 +2,12 @@ import type { Project } from "../data/projects";
 
 interface CardProps {
     project: Project;
+    delay: number;  // Add this prop for the delay
 }
 
-function Card({ project }: CardProps) {
+function Card({ project, delay }: CardProps) {
     return (
-        <div className="card">
+        <div className="project-card reveal reveal-up" data-delay={delay}>
             <img src={project.hero.image} alt={project.hero.title} className="card-image" />
             <div className="card-content">
                 <h3 className="card-title">{project.hero.title}</h3>

@@ -3,85 +3,53 @@ import { useNavigate } from "react-router-dom";
 
 function Nav() {
     const navRef = useRef<HTMLElement>(null);
-    const [navHeight, setNavHeight] = useState(0);
+    const [scrolled, setScrolled] = useState(false);
     const navigate = useNavigate();
 
-    // Measure nav height on mount
     useEffect(() => {
-        if (navRef.current) {
-            setNavHeight(navRef.current.offsetHeight);
-        }
+        const onScroll = () => setScrolled(window.scrollY > 10);
+        window.addEventListener("scroll", onScroll, { passive: true });
+        return () => window.removeEventListener("scroll", onScroll);
     }, []);
 
-    // Handle click: Scroll on Home, navigate + scroll from other pages
     const handleScrollToSection = (sectionId: string, event: React.MouseEvent) => {
-        event.preventDefault(); // Prevent URL change
+        event.preventDefault();
         if (window.location.pathname === "/") {
-            // On Home: Scroll directly
             const section = document.getElementById(sectionId);
             if (section) {
-                // Center the section in the viewport
-                const offsetTop = section.offsetTop + (section.offsetHeight / 2) - (window.innerHeight + navHeight) / 2;
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: "smooth",
-                });
+                const navHeight = navRef.current?.offsetHeight ?? 64;
+                const offsetTop = section.offsetTop - navHeight;
+                window.scrollTo({ top: offsetTop, behavior: "smooth" });
             }
         } else {
-            // From other pages: Navigate to Home with section in state
             navigate("/", { state: { scrollTo: sectionId } });
         }
     };
 
+    const links = [
+        { label: "Home",     id: "home" },
+        { label: "About",    id: "about" },
+        { label: "Skills",   id: "skills" },
+        { label: "Projects", id: "projects-preview" },
+        { label: "Contact",  id: "contact" },
+    ];
+
     return (
-        <nav className="nav" ref={navRef}>
-            <div className="nav-logo">Leon</div>
+        <nav className={`nav${scrolled ? " scrolled" : ""}`} ref={navRef}>
+            <span className="nav-logo">Leon</span>
+
             <ul className="nav-links">
-                <li>
-                    <a
-                        href="#home"
-                        onClick={(e) => handleScrollToSection("home", e)}
-                        className="nav-link"
-                    >
-                        Home
-                    </a>
-                </li>
-                <li>
-                    <a
-                        href="#about"
-                        onClick={(e) => handleScrollToSection("about", e)}
-                        className="nav-link"
-                    >
-                        About
-                    </a>
-                </li>
-                <li>
-                    <a
-                        href="#skills"
-                        onClick={(e) => handleScrollToSection("skills", e)}
-                        className="nav-link"
-                    >
-                        Skills
-                    </a>
-                </li>
-                <li>
-                    <a
-                        href="#projects-preview"
-                        onClick={(e) => handleScrollToSection("projects-preview", e)}
-                        className="nav-link"
-                    >
-                        Projects
-                    </a>
-                </li>
-                <li>
-                    <a
-                        href="#contact"
-                        onClick={(e) => handleScrollToSection("contact", e)}
-                        className="nav-link"
-                    >
-                        Contact
-                    </a>
-                </li>
+                {links.map(({ label, id }) => (
+                    <li key={id}>
+                        <a
+                            href={`#${id}`}
+                            className="nav-link"
+                            onClick={(e) => handleScrollToSection(id, e)}
+                        >
+                            {label}
+                        </a>
+                    </li>
+                ))}
             </ul>
         </nav>
     );

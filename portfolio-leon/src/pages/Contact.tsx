@@ -1,21 +1,36 @@
 function Contact() {
     return (
-        <div className="contact">
-            <h2>Get In Touch</h2>
-            <p className="contact-subtitle">Feel free to reach out to me on any of these platforms:</p>
-
-            <div className="contact-links">
-                <a href="mailto:leondecarte@gmail.com" className="contact-link">
-                    <span className="contact-text">Email</span>
-                </a>
-
-                <a href="https://www.linkedin.com/in/l%C3%A9on-decarte-398bb3245/" target="_blank" rel="noopener noreferrer" className="contact-link">
-                    <span className="contact-text">LinkedIn</span>
-                </a>
-
-                <a href="https://github.com/Leon-Decarte" target="_blank" rel="noopener noreferrer" className="contact-link">
-                    <span className="contact-text">GitHub</span>
-                </a>
+        <div className="contact-cta">
+            <div className="contact-cta-inner reveal-up" data-delay="1">
+                <span className="contact-cta-eyebrow">Available for work</span>
+                <h2 className="contact-cta-heading">
+                    Ready to build<br />something great?
+                </h2>
+                <p className="contact-cta-sub">
+                    Open to work-study opportunities and freelance projects.
+                    Let's talk about what we can create together.
+                </p>
+                <div className="contact-cta-actions">
+                    <a href="mailto:leondecarte@gmail.com" className="btn contact-btn-primary">
+                        Send an email
+                    </a>
+                    <a
+                        href="https://www.linkedin.com/in/l%C3%A9on-decarte-398bb3245/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn contact-btn-ghost"
+                    >
+                        LinkedIn
+                    </a>
+                    <a
+                        href="https://github.com/Leon-Decarte"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn contact-btn-ghost"
+                    >
+                        GitHub
+                    </a>
+                </div>
             </div>
         </div>
     );

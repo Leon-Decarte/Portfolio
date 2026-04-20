@@ -1,11 +1,55 @@
 :root {
-    --primary: #8B3DFF;
-    --primary-light: #D6C3FF;
-    --primary-dark: #4B00D9;
+    /* ─── Brand ─────────────────────────────────────── */
+    --accent:           #5B3BFF;
+    --accent-tint:      #F0EDF9;
+    --accent-tint-border: #DDD8F5;
+    --accent-text:      #3B2AAA;
 
-    --bg-light: #F3F4FF;
-    --bg-white: #FFFFFF;
+    /* ─── Surface ────────────────────────────────────── */
+    --bg-page:          #F7F7FB;
+    --bg-card:          #FFFFFF;
+    --bg-card-hover:    #FAFAFA;
 
-    --text-main: #1E1E2F;
-    --text-muted: #6B6F8A;
+    /* ─── Text ───────────────────────────────────────── */
+    --text-primary:     #0F0F12;
+    --text-secondary:   #6B6B7A;
+    --text-muted:       #9999AA;
+
+    /* ─── Borders ────────────────────────────────────── */
+    --border:           #E4E4EE;
+    --border-strong:    #CDCDD8;
+
+    /* ─── Typography ─────────────────────────────────── */
+    --font:             "Montserrat", sans-serif;
+
+    /* ─── Type scale ─────────────────────────────────── */
+    --text-label:       0.6875rem;  /* 11px */
+    --text-sm:          0.875rem;   /* 14px */
+    --text-base:        0.9375rem;  /* 15px */
+    --text-lg:          1.125rem;   /* 18px */
+    --text-xl:          1.5rem;     /* 24px */
+    --text-2xl:         2rem;       /* 32px */
+    --text-display:     clamp(2.75rem, 6vw, 4.5rem);
+
+    /* ─── Spacing ────────────────────────────────────── */
+    --section-gap:      8rem;
+    --section-padding:  clamp(2rem, 5vw, 4rem);
+
+    /* ─── Radius ─────────────────────────────────────── */
+    --radius-sm:        6px;
+    --radius-md:        10px;
+    --radius-lg:        16px;
+
+    /* ─── Shadows ────────────────────────────────────── */
+    --shadow-card:      0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+    --shadow-card-hover:0 4px 12px rgba(0,0,0,0.08), 0 16px 40px rgba(0,0,0,0.06);
+    --shadow-accent:    0 8px 24px rgba(91,59,255,0.18);
+
+    /* ─── Transitions ────────────────────────────────── */
+    --ease:             cubic-bezier(0.16, 1, 0.3, 1);
+    --duration:         220ms;
+    --duration-slow:    400ms;
+
+    /* ─── Nav ────────────────────────────────────────── */
+    --nav-height:       64px;
 }

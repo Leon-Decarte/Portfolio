@@ -1,64 +1,51 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 import About from "./About";
 import Skills from "./Skills";
 import Hero from "./Hero";
-import Contact from "./Contact"; 
+import Contact from "./Contact";
 import Projects from "./Projects";
 
 function Home() {
     const location = useLocation();
+    useScrollReveal();
 
     useEffect(() => {
-        // Always start at top
         window.scrollTo(0, 0);
-        
-
         if (location.state?.scrollTo) {
             const section = document.getElementById(location.state.scrollTo);
-
             if (section) {
-                const navHeight = 60; // Hardcode or calculate
-                // Center the section in the viewport
-                const offsetTop = section.offsetTop - (window.innerHeight / 2) + navHeight;
-
                 setTimeout(() => {
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: "smooth",
-                    });
+                    window.scrollTo({ top: section.offsetTop - 64, behavior: "smooth" });
                 }, 50);
             }
-
-            // 🔥 IMPORTANT: clear the state after using it
             window.history.replaceState({}, document.title);
         }
     }, [location.key]);
 
     return (
         <main className="home">
-            <section className="hero" id="home">
+            <section id="home" data-theme="odd">
                 <Hero />
-                <div className="hero-visual">
-                    <div className="gradient-orb" />
-                </div>
             </section>
 
-            <section id="about">
+            <section id="about" data-theme="even">
                 <About />
             </section>
 
-            <section id="skills">
+            <section id="skills" data-theme="odd">
                 <Skills />
             </section>
 
-            <section id="projects-preview">
+            <section id="projects-preview" data-theme="even">
                 <Projects />
             </section>
 
-            <section id="contact">
+            {/* Full-bleed contact — lives outside section so no max-width clips it */}
+            <div id="contact" style={{ width: "100%" }}>
                 <Contact />
-            </section>
+            </div>
         </main>
     );
 }

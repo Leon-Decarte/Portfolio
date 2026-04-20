@@ -1,16 +1,38 @@
 function About() {
-    return <div className="about">
-        <h1>About</h1>
+    return (
+        <div className="about">
+            <div className="reveal-up" data-delay="1">
+                <span className="section-eyebrow">About me</span>
+                <h2 className="section-heading">Design roots,<br />engineering mindset.</h2>
+            </div>
 
-        <div className="about-content">
-            <p>I am a web developer with an initial background in graphic design and UX/UI. This dual perspective allows me to design interfaces that are aesthetically pleasing, user-friendly, and technically sound. After training in front-end JavaScript/React development, I am now pursuing full-stack development, aiming to master the entire web application lifecycle. Curious, meticulous, and dedicated, I enjoy understanding what I develop, why I develop it, and for whom. I am seeking a work-study opportunity that will allow me to learn on real-world projects and become a long-term member of a team.
-            </p>
-            <div className="about-picture">
-                <img src="public\profile.png" alt="Profile" />
+            <div className="about-layout">
+                <div className="about-body reveal-up" data-delay="2">
+                    <p>
+                        I started in graphic design and UX/UI before pivoting to engineering —
+                        which means I care equally about how something works and how it feels.
+                        After training in frontend React development I'm now pursuing full-stack,
+                        working toward owning the entire lifecycle of a web application.
+                    </p>
+                    <p style={{ marginTop: "1.25rem" }}>
+                        Curious, detail-oriented, and genuinely passionate about clean interfaces.
+                        I'm looking for a work-study opportunity where I can learn on real projects
+                        and grow as a long-term part of a team.
+                    </p>
+                    <div className="hero-actions" style={{ marginTop: "2rem" }}>
+                        <a href="#contact" className="btn primary">Let's talk</a>
+                        <a href="/cv.pdf" target="_blank" rel="noopener noreferrer" className="btn secondary">
+                            Download CV
+                        </a>
+                    </div>
+                </div>
+
+                <div className="about-picture reveal-right" data-delay="3">
+                    <img src="/profile.png" alt="Leon Decarte" />
+                </div>
             </div>
         </div>
-
-    </div>;
+    );
 }
 
 export default About;

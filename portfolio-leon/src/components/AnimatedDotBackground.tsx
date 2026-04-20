@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 const AnimatedDotBackground: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number | null>(null);
   const mouseRef = useRef({ x: -1000, y: -1000, active: false });
   const targetIntensityRef = useRef(0);
   const currentIntensityRef = useRef(0);

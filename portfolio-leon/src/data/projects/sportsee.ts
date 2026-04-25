@@ -11,7 +11,7 @@ export const sportsee: Project = {
         description: "React dashboard application with data visualization.",
         image: "src/assets/sportsee/main.png",
         demoLink: "https://sportsee-dashboard.vercel.app",
-        githubLink: "https://github.com/Leon-Decarte/P12_SportSee",
+        githubLink: "https://p12-sportsee-one.vercel.app/",
     },
 
     context: "Context and background of the project.",

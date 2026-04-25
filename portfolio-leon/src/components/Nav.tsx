@@ -18,8 +18,7 @@ function Nav() {
             const section = document.getElementById(sectionId);
             if (section) {
                 const navHeight = navRef.current?.offsetHeight ?? 64;
-                const offsetTop = section.offsetTop - navHeight;
-                window.scrollTo({ top: offsetTop, behavior: "smooth" });
+                window.scrollTo({ top: section.offsetTop - navHeight, behavior: "smooth" });
             }
         } else {
             navigate("/", { state: { scrollTo: sectionId } });
@@ -37,7 +36,6 @@ function Nav() {
     return (
         <nav className={`nav${scrolled ? " scrolled" : ""}`} ref={navRef}>
             <span className="nav-logo">Leon</span>
-
             <ul className="nav-links">
                 {links.map(({ label, id }) => (
                     <li key={id}>
@@ -46,7 +44,10 @@ function Nav() {
                             className="nav-link"
                             onClick={(e) => handleScrollToSection(id, e)}
                         >
-                            {label}
+                            <span className="nav-link-roll">
+                                <span>{label}</span>
+                                <span>{label}</span>
+                            </span>
                         </a>
                     </li>
                 ))}

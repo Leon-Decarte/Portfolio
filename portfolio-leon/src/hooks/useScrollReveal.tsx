@@ -1,13 +1,10 @@
 import { useEffect } from "react";
 
-const SELECTORS = ".reveal, .reveal-up, .reveal-left, .reveal-right";
+const SELECTORS = ".reveal, .reveal-up, .reveal-left, .reveal-right, .reveal-clip";
 
 function observeAll(observer: IntersectionObserver) {
     document.querySelectorAll(SELECTORS).forEach((el) => {
-        // Only observe elements that haven't been revealed yet
-        if (!el.classList.contains("visible")) {
-            observer.observe(el);
-        }
+        if (!el.classList.contains("visible")) observer.observe(el);
     });
 }
 
@@ -18,10 +15,8 @@ export function useScrollReveal() {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
                         const el = entry.target as HTMLElement;
-                        const delay = el.dataset.delay
-                            ? Number(el.dataset.delay) * 0.08
-                            : 0;
-                        el.style.transitionDelay = `${delay}s`;
+                        const d = el.dataset.delay;
+                        el.style.transitionDelay = d ? `${Number(d) * 0.08}s` : "0s";
                         el.classList.add("visible");
                         observer.unobserve(el);
                     }
@@ -32,13 +27,9 @@ export function useScrollReveal() {
 
         observeAll(observer);
 
-        // Re-scan DOM when new elements are added (e.g. "show more" reveals cards)
         const mutation = new MutationObserver(() => observeAll(observer));
         mutation.observe(document.body, { childList: true, subtree: true });
 
-        return () => {
-            observer.disconnect();
-            mutation.disconnect();
-        };
+        return () => { observer.disconnect(); mutation.disconnect(); };
     }, []);
 }

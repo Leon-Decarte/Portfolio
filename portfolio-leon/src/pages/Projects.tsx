@@ -2,65 +2,49 @@ import { useState } from "react";
 import { projectsData } from "../data/projects";
 import type { Project } from "../data/projects";
 
-function FeaturedCard({ project }: { project: Project }) {
+function ProjectCard({ project, featured = false, delay = 1 }: {
+    project: Project;
+    featured?: boolean;
+    delay?: number;
+}) {
     return (
-        <a
-            href={project.hero.demoLink ?? project.hero.githubLink ?? "#"}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="project-featured reveal-up"
-            data-delay="2"
-        >
-            <img
-                src={project.hero.image}
-                alt={project.hero.title}
-                className="project-featured-img"
-            />
-            <div className="project-featured-info">
-                <div className="project-featured-meta">
-                    <span className="pcard-category">{project.category}</span>
-                    <span className="pcard-year">{project.year}</span>
-                </div>
-                <h3 className="project-featured-title">{project.hero.title}</h3>
-                <p className="project-featured-desc">{project.hero.description}</p>
-                <div className="pcard-tags">
-                    {project.stack.map((tech) => (
-                        <span key={tech} className="pcard-tag">{tech}</span>
-                    ))}
+        <div className={`pcard reveal-up${featured ? " pcard--featured" : ""}`} data-delay={String(delay)}>
+            <div className="pcard-img-wrap">
+                <div className="pcard-img-inner">
+                    <img src={project.hero.image} alt={project.hero.title} className="pcard-img" />
                 </div>
             </div>
-        </a>
-    );
-}
+            <div className="pcard-body">
+                <div className="pcard-body-top">
+                    
+                    <h3 className="pcard-title">{project.hero.title}</h3>
+                    <div className="pcard-body-meta">
+                        <span className="pcard-cat">{project.category}</span>
+                        <span className="pcard-yr">{project.year}</span>
+                    </div>
+                    <p className="pcard-desc">{project.hero.description}</p>
+                </div>
 
-function ProjectCard({ project, delay }: { project: Project; delay: number }) {
-    return (
-        <a
-            href={project.hero.demoLink ?? project.hero.githubLink ?? "#"}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="project-card reveal-up"
-            data-delay={String(delay)}
-        >
-            <img
-                src={project.hero.image}
-                alt={project.hero.title}
-                className="project-card-img"
-            />
-            <div className="project-card-info">
-                <div className="pcard-meta">
-                    <span className="pcard-category">{project.category}</span>
-                    <span className="pcard-year">{project.year}</span>
-                </div>
-                <h3 className="project-card-title">{project.hero.title}</h3>
-                <p className="project-card-desc">{project.hero.description}</p>
-                <div className="pcard-tags">
+                <div className="pcard-stack-row">
                     {project.stack.map((tech) => (
-                        <span key={tech} className="pcard-tag">{tech}</span>
+                        <span key={tech} className="pcard-tech">{tech}</span>
                     ))}
                 </div>
+
+                <div className="pcard-actions">
+                    {project.hero.demoLink && (
+                        <a href={project.hero.demoLink} target="_blank" rel="noopener noreferrer" className="pcard-cta">
+                            View project
+                        </a>
+                    )}
+                    {project.hero.githubLink && (
+                        <a href={project.hero.githubLink} target="_blank" rel="noopener noreferrer" className="pcard-cta pcard-cta--ghost">
+                            GitHub
+                        </a>
+                    )}
+                </div>
             </div>
-        </a>
+        </div>
     );
 }
 
@@ -73,13 +57,12 @@ function Projects() {
     return (
         <div className="projects-section">
             <div className="reveal-up" data-delay="1">
-                <span className="section-eyebrow">Selected work</span>
-                <h2 className="section-heading">Projects that<br />ship and scale.</h2>
+                <h2 className="section-heading">Projects</h2>
             </div>
 
-            {featured && <FeaturedCard project={featured} />}
+            {featured && <ProjectCard project={featured} featured delay={2} />}
 
-            <div className="project-grid">
+            <div className="pcard-grid">
                 {visible.map((project, i) => (
                     <ProjectCard key={project.id} project={project} delay={i + 3} />
                 ))}
@@ -87,13 +70,8 @@ function Projects() {
 
             {hiddenCount > 0 && (
                 <div className="project-more reveal-up" data-delay="4">
-                    <button
-                        className="project-more-btn"
-                        onClick={() => setShowAll((s) => !s)}
-                    >
-                        {showAll
-                            ? "Show less"
-                            : `Show ${hiddenCount} more project${hiddenCount > 1 ? "s" : ""}`}
+                    <button className="project-more-btn" onClick={() => setShowAll((s) => !s)}>
+                        {showAll ? "Show less" : `Show ${hiddenCount} more project${hiddenCount > 1 ? "s" : ""}`}
                     </button>
                 </div>
             )}

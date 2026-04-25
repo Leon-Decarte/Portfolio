@@ -7,10 +7,10 @@ export const kasaProject: Project = {
     status: "completed",
 
     hero: {
-        title: "Kasa – Rental Platform",
+        title: "Kasa",
         description:
             "React application with dynamic routing and reusable components.",
-        image: "src/assets/sportsee/main.png",
+        image: "src/assets/kasa/kasa.png",
         demoLink: "https://kasa-nine-rho.vercel.app",
         githubLink: "https://github.com/Leon-Decarte/P11_Kasa",
     },

@@ -9,31 +9,31 @@ export const lespetitplat: Project = {
     hero: {
         title: "Les Petits Plats – Restaurant",
         description: "React application for a restaurant with menu and reservation features.",
-        image: "src/assets/lespetitplat/main.png",
-        demoLink: "https://lespetitplat.vercel.app",
-        githubLink: "https://github.com/Leon-Decarte/P13_LesPetitsPlats",
+        image: "src/assets/Petit Plats/main.png",
+        demoLink: "https://lespetitsplats-one.vercel.app/",
+        githubLink: "https://github.com/Leon-Decarte/P7_les_petits_plats",
     },
 
     context: "Context and background of the project.",
 
-    stack: ["React", "TypeScript", "Tailwind CSS"],
+    stack: ["React", "JavaScript", "Tailwind CSS"],
 
     features: [
         {
             title: "Feature 1",
             description: "Description of feature 1.",
-            image: "/images/project2/feature1.png",
+            image: "/images/lespetitplat/feature1.png",
         },
         {
             title: "Feature 2",
             description: "Description of feature 2.",
-            image: "/images/project2/feature2.png",
+            image: "/images/lespetitplat/feature2.png",
         },
     ],
 
     responsive: {
-        desktop: "/images/project2/desktop.png",
-        mobile: "/images/project2/mobile.png",
+        desktop: "/images/lespetitplat/desktop.png",
+        mobile: "/images/lespetitplat/mobile.png",
     },
 
     highlights: [

@@ -8,7 +8,9 @@ interface CardProps {
 function Card({ project, delay }: CardProps) {
     return (
         <div className="project-card reveal reveal-up" data-delay={delay}>
-            <img src={project.hero.image} alt={project.hero.title} className="card-image" />
+            <div className="project-card-image-wrap">
+                <img src={project.hero.image} alt={project.hero.title} className="card-image" />
+            </div>
             <div className="card-content">
                 <h3 className="card-title">{project.hero.title}</h3>
                 <p className="card-description">{project.hero.description}</p>

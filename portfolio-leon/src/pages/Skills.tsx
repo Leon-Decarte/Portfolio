@@ -1,3 +1,5 @@
+import TiltCard from "./TiltCard";
+
 const skillGroups = [
     {
         title: "UX / UI Design",
@@ -32,24 +34,24 @@ function Skills() {
     return (
         <div className="skills">
             <div className="reveal-up" data-delay="1">
-                <span className="section-eyebrow">Expertise</span>
-                <h2 className="section-heading">What I bring<br />to a project.</h2>
+                <h2 className="section-heading">Skills</h2>
             </div>
 
             <div className="skills-grid">
                 {skillGroups.map((group, i) => (
-                    <div
-                        key={group.title}
-                        className="skill-card reveal-up"
-                        data-delay={String(i + 2)}
-                    >
-                        <p className="skill-card-title">{group.title}</p>
-                        <ul className="skill-list">
-                            {group.skills.map((skill) => (
-                                <li key={skill}>{skill}</li>
-                            ))}
-                        </ul>
-                    </div>
+                    <TiltCard key={group.title}>
+                        <div
+                            className="skill-card reveal-up"
+                            data-delay={String(i + 2)}
+                        >
+                            <p className="skill-card-title">{group.title}</p>
+                            <ul className="skill-list">
+                                {group.skills.map((skill) => (
+                                    <li key={skill}>{skill}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    </TiltCard>
                 ))}
             </div>
         </div>
@@ -57,3 +59,4 @@ function Skills() {
 }
 
 export default Skills;
+

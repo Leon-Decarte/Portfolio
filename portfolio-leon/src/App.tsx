@@ -3,12 +3,10 @@ import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Projects from "./pages/Projects";
-import CursorDot from "./components/CursorDot";
 
 function App() {
     return (
         <BrowserRouter>
-            <CursorDot />
             <Nav />
             <Routes>
                 <Route path="/" element={<Home />} />

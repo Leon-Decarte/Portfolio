@@ -63,7 +63,7 @@ const TiltCard = ({ children }: TiltCardProps) => {
     >
       <div
         style={{
-          transform: "translateZ(50px)",
+          transform: "translateZ(0px)",
           transformStyle: "preserve-3d",
           width: "100%",   // ✅ ADD THIS
           height: "100%",  // ✅ ADD THIS

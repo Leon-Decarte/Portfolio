@@ -3,6 +3,8 @@ import TiltCard from "./TiltCard";
 const skillGroups = [
     {
         title: "UX / UI Design",
+        icon: "🎨",
+
         skills: [
             "Figma · Photoshop · Illustrator",
             "User research & empathy mapping",
@@ -12,6 +14,8 @@ const skillGroups = [
     },
     {
         title: "Frontend",
+        icon: "💻",
+
         skills: [
             "HTML5 · CSS3 · Sass",
             "JavaScript · TypeScript",
@@ -21,6 +25,8 @@ const skillGroups = [
     },
     {
         title: "Backend",
+        icon: "🛠️",
+
         skills: [
             "Java · Spring Boot",
             "SQL databases",

@@ -2,8 +2,7 @@ function About() {
     return (
         <div className="about">
             <div className="reveal-up" data-delay="1">
-                <span className="section-eyebrow">About me</span>
-                <h2 className="section-heading">Design roots,<br />engineering mindset.</h2>
+                <h2 className="section-heading">My background</h2>
             </div>
 
             <div className="about-layout">

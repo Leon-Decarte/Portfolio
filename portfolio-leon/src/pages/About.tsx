@@ -26,9 +26,7 @@ function About() {
                     </div>
                 </div>
 
-                <div className="about-picture reveal-right" data-delay="3">
-                    <img src="/profile.png" alt="Leon Decarte" />
-                </div>
+                
             </div>
         </div>
     );

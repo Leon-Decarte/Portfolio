@@ -6,6 +6,7 @@ import Skills from "./Skills";
 import Hero from "./Hero";
 import Contact from "./Contact";
 import Projects from "./Projects";
+import ScrollFigure from "../components/ScrollFigure"; // adjust path if needed
 
 function Home() {
     const location = useLocation();
@@ -26,13 +27,23 @@ function Home() {
 
     return (
         <main className="home">
-            <section id="home" data-theme="odd">
-                <Hero />
-            </section>
 
-            <section id="about" data-theme="even">
-                <About />
-            </section>
+
+            <div id="intro" className="intro-layout">
+                <div className="intro-text">
+                    <section id="home" data-theme="odd">
+                        <Hero />
+                    </section>
+
+                    <section id="about" data-theme="even">
+                        <About />
+                    </section>
+                </div>
+
+                <div className="intro-visual">
+                    <ScrollFigure />
+                </div>
+            </div>
 
             <section id="skills" data-theme="odd">
                 <Skills />

@@ -1,63 +1,74 @@
 import { useEffect, useRef, useState } from "react";
 
 const TOTAL_FRAMES = 26;
-const FRAME_PATH = (n: number) => `/frames/f${n}.png`;
+
+const frames = Array.from({ length: TOTAL_FRAMES }, (_, i) =>
+    new URL(`../assets/editedFrames/f${i + 1}.png`, import.meta.url).href
+);
 
 function preloadFrames() {
-    for (let i = 1; i <= TOTAL_FRAMES; i++) {
+    frames.forEach((src) => {
         const img = new Image();
-        img.src = FRAME_PATH(i);
-    }
+        img.src = src;
+    });
 }
 
 export default function ScrollFigure() {
-    const [frame, setFrame] = useState(1);
+    const [frameIndex, setFrameIndex] = useState(0);
     const rafRef = useRef<number | null>(null);
 
     useEffect(() => {
         preloadFrames();
 
-        const onScroll = () => {
-            if (rafRef.current) cancelAnimationFrame(rafRef.current);
+        const update = () => {
+            const intro = document.getElementById("intro");
+            if (!intro) return;
 
-            rafRef.current = requestAnimationFrame(() => {
-                const intro = document.getElementById("intro");
-                if (!intro) return;
+            const introTop = intro.offsetTop;
+            const introHeight = intro.offsetHeight;
+            const viewH = window.innerHeight;
+            const navH = 64;
+            const figureH = viewH - navH;
 
-                const rect = intro.getBoundingClientRect();
-                const windowHeight = window.innerHeight;
+            // Scroll range over which frames play:
+            // starts when intro top reaches nav bottom,
+            // ends when intro bottom reaches viewport bottom
+            const scrollStart = introTop;
+            const scrollEnd = introTop + introHeight - figureH;
+            const scrollRange = Math.max(scrollEnd - scrollStart, 1);
 
-                // Progress from when intro hits top → when it leaves viewport
-                let progress = -rect.top / (rect.height - windowHeight);
+            const scrollY = window.scrollY;
+            const progress = Math.min(Math.max((scrollY - scrollStart) / scrollRange, 0), 1);
+            const index = Math.min(Math.floor(progress * TOTAL_FRAMES), TOTAL_FRAMES - 1);
 
-                // clamp
-                progress = Math.min(Math.max(progress, 0), 1);
-
-                const index = Math.min(
-                    Math.floor(progress * TOTAL_FRAMES) + 1,
-                    TOTAL_FRAMES
-                );
-
-                setFrame((prev) => (prev === index ? prev : index));
-            });
+            setFrameIndex((prev) => (prev === index ? prev : index));
         };
 
-        onScroll();
+        const onScroll = () => {
+            if (rafRef.current) cancelAnimationFrame(rafRef.current);
+            rafRef.current = requestAnimationFrame(update);
+        };
+
+        update();
         window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", update);
 
         return () => {
             window.removeEventListener("scroll", onScroll);
+            window.removeEventListener("resize", update);
             if (rafRef.current) cancelAnimationFrame(rafRef.current);
         };
     }, []);
 
     return (
-    <div className="scroll-figure-frame">
-        <img
-            src={FRAME_PATH(frame)}
-            alt=""
-            className="scroll-figure-img"
-        />
-    </div>
-);
+        <div className="intro-figure">
+            <div className="scroll-figure-frame">
+                <img
+                    src={frames[frameIndex]}
+                    alt=""
+                    className="scroll-figure-img"
+                />
+            </div>
+        </div>
+    );
 }

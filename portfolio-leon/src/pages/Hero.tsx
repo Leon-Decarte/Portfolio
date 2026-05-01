@@ -3,7 +3,6 @@ function Hero() {
         <div className="hero-layout">
             {/* Left: copy */}
             <div className="hero-content">
-
                 <h1 className="hero-title reveal-up" data-delay="2">
                     I LISTEN<br />
                     I DESIGN.<br />
@@ -25,7 +24,6 @@ function Hero() {
                     </a>
                 </div>
             </div>
-
         </div>
     );
 }

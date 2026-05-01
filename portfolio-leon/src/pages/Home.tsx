@@ -43,7 +43,7 @@ function Home() {
                         <About />
                     </section>
                 </div>
- 
+
                 {/* Figure: absolute column on the right, sticky frame inside */}
                 <ScrollFigure />
             </div>

@@ -50,6 +50,7 @@ body::before {
     flex-direction: column;
     align-items: stretch;
 }
+
 .home>div {
     width: 100%;
     display: flex;
@@ -61,8 +62,7 @@ body::before {
 /* Each section stretches full viewport width */
 .home>section {
     width: 100%;
-    display: flex;
-    justify-content: center;
+
     padding: var(--section-padding) 10vw;
 
 }
@@ -72,7 +72,6 @@ body::before {
 .home>section#home {
     min-height: calc(100vh - var(--nav-height));
     align-items: center;
-    padding: 0;
 }
 
 /* Section background alternation */
@@ -85,12 +84,6 @@ body::before {
 }
 
 /* The direct child of each section is the content block — give it responsive width */
-.home>section>* {
-    width: min(1400px, 90vw);
-}
-.home>* {
-    width: min(1400px, 90vw);
-}
 
 
 
@@ -192,6 +185,7 @@ body::before {
     color: var(--text-primary);
     line-height: 1.15;
     margin: 0 0 0.75rem;
+    width: 100%;
 }
 
 .section-subtext {
@@ -272,6 +266,7 @@ body::before {
 
 .reveal-clip[data-delay="2"] {
     transition-delay: 0.08s;
+    width: 100%;
 }
 
 .reveal-clip[data-delay="3"] {
@@ -621,17 +616,22 @@ body::before {
    ABOUT
    ═══════════════════════════════════════════════════════════════ */
 
+#about {
+    min-height: 600px;  /* ou height: 500px; si tu veux strictement fixe */
+    height: 600px;
+/* Centre verticalement le contenu texte */
+}
+
 .about {
+
     display: flex;
     flex-direction: column;
 }
 
 .about-layout {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 4rem;
-    align-items: center;
+
     margin-top: 2rem;
+    padding: 1rem;
 }
 
 @media (max-width: 700px) {
@@ -794,36 +794,41 @@ body::before {
     position: relative;
     width: 100%;
     display: flex;
-        display: flex;
+    display: flex;
     gap: clamp(2rem, 5vw, 6rem);
-        outline: 2px solid red;
+    outline: 2px solid red;
 
 }
 
 .intro-text {
     flex: 1;
     min-width: 0;
-        outline: 2px solid rgb(0, 255, 34);
+    outline: 2px solid rgb(0, 255, 34);
 
 }
 
-.intro-text > section {
+.intro-text>section {
     width: 100%;
     display: flex;
     justify-content: center;
-        outline: 2px solid rgb(255, 196, 0);
+    outline: 2px solid rgb(255, 196, 0);
 
 }
 
-.intro-text > section#home {
+.intro-text>section#home {
     min-height: calc(100vh - var(--nav-height));
     align-items: start;
     padding: 0;
-    
+
 }
 
-.intro-text > section[data-theme="odd"]  { background-color: var(--bg-page); }
-.intro-text > section[data-theme="even"] { background-color: var(--bg-card); }
+.intro-text>section[data-theme="odd"] {
+    background-color: var(--bg-page);
+}
+
+.intro-text>section[data-theme="even"] {
+    background-color: var(--bg-card);
+}
 
 
 
@@ -836,20 +841,50 @@ body::before {
     display: flex;
     flex-direction: column;
     position: relative;
-            outline: 2px solid rgb(195, 0, 255);
+    outline: 2px solid rgb(195, 0, 255);
+}
+
+#intro {
+    position: relative;
+    width: 100%;
+    display: grid;
+    /* Change flex en grid */
+    grid-template-columns: 1fr clamp(280px, 35vw, 600px);
+    /* 1fr pour texte, largeur fixe pour image */
+    gap: clamp(2rem, 5vw, 6rem);
+    align-items: stretch;
+    /* Les deux colonnes auront la même hauteur */
+}
+
+.intro-text {
+    /* Enlève flex: 1, plus besoin */
+    min-width: 0;
+}
+
+.intro-figure {
+    background-color: #4228e0;
+    width: 100%;
+    /* Prend toute la largeur de sa colonne */
+    min-width: 0;
+    position: relative;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
 }
 
 .scroll-figure-frame {
     background-color: #22C55E;
 
-        width: 100%;
-    aspect-ratio: 6 / 6;
+    width: 100%;
+    aspect-ratio: 6 / 4;
     overflow: hidden;
 
     display: flex;
     justify-content: center;
     align-items: stretch;
-            outline: 2px solid rgb(255, 0, 149);
+    outline: 2px solid rgb(255, 0, 149);
+    height: 400px;
+
 
 }
 
@@ -860,7 +895,7 @@ body::before {
     object-fit: cover;
 
     /* adjust these two values only */
-    object-position: 60px 55%;
+    object-position: 60px 45%;
 
     display: block;
     flex-shrink: 0;
@@ -873,13 +908,22 @@ body::before {
 
 .scroll-sticky {
     position: sticky;
-    top: var(--nav-height);  /* Au lieu de top: 0 */
-    transform: translateY(0); /* Plus besoin de translate */
+    top: var(--nav-height);
+    /* Au lieu de top: 0 */
+    transform: translateY(0);
+    /* Plus besoin de translate */
+    height: 600px;
+    align-content: center;
 }
 
 @media (max-width: 1000px) {
-    #intro { display: block; }
-    .intro-figure { display: none; }
+    #intro {
+        display: block;
+    }
+
+    .intro-figure {
+        display: none;
+    }
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -893,6 +937,9 @@ body::before {
     align-items: center;
 }
 
+.projects-section> :first-child {
+    width: 100%;
+}
 
 /* 2-column grid for regular cards */
 .pcard-grid {
@@ -1208,9 +1255,9 @@ body::before {
     CONTACT CTA BAND
    ═══════════════════════════════════════════════════════════════ */
 
-    #contact {
-            padding: 0;
-    }
+#contact {
+    padding: 0;
+}
 
 
 .contact-cta {

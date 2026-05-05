@@ -68,7 +68,7 @@ export default function ScrollFigure() {
 
             rafRef.current = requestAnimationFrame(updateAnimation);
         };
-
+        
         const handleScroll = () => {
             if (rafRef.current) cancelAnimationFrame(rafRef.current);
             rafRef.current = requestAnimationFrame(updateAnimation);

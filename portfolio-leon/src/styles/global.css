@@ -43,25 +43,30 @@ body::before {
    on mobile it fills 94%.
    Padding is also fluid — never a hard gap on any screen.
 */
-.inner {
-    width: min(1400px, 90vw);
-    margin-left: auto;
-    margin-right: auto;
-}
+
 
 .home {
     display: flex;
     flex-direction: column;
     align-items: stretch;
 }
+.home>div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: var(--section-padding) 10vw;
+}
+
 
 /* Each section stretches full viewport width */
 .home>section {
     width: 100%;
     display: flex;
     justify-content: center;
-    padding: var(--section-padding) 0;
+    padding: var(--section-padding) 10vw;
+
 }
+
 
 /* Hero section needs to be tall */
 .home>section#home {
@@ -83,13 +88,13 @@ body::before {
 .home>section>* {
     width: min(1400px, 90vw);
 }
+.home>* {
+    width: min(1400px, 90vw);
+}
+
 
 
 /* Hero section: inner div needs full height too */
-.home>section#home>* {
-    width: min(1400px, 90vw);
-    padding: clamp(3rem, 6vw, 5rem) 0;
-}
 
 /* ═══════════════════════════════════════════════════════════════
    NAV
@@ -785,108 +790,94 @@ body::before {
    INTRO ZONE
    ═══════════════════════════════════════════════════════════════ */
 
-/* ═══════════════════════════════════════════════════════════════
-   INTRO ZONE
-   ═══════════════════════════════════════════════════════════════ */
-
-/* ═══════════════════════════════════════════════════════════════
-   INTRO ZONE
-   ═══════════════════════════════════════════════════════════════ */
-
 #intro {
     position: relative;
     width: 100%;
     display: flex;
-    padding: 0 10vw;
+        display: flex;
+    gap: clamp(2rem, 5vw, 6rem);
+        outline: 2px solid red;
+
 }
 
 .intro-text {
     flex: 1;
     min-width: 0;
+        outline: 2px solid rgb(0, 255, 34);
+
 }
 
 .intro-text > section {
     width: 100%;
     display: flex;
     justify-content: center;
-    padding: var(--section-padding) 0;
+        outline: 2px solid rgb(255, 196, 0);
+
 }
 
 .intro-text > section#home {
     min-height: calc(100vh - var(--nav-height));
-    align-items: center;
+    align-items: start;
     padding: 0;
+    
 }
 
 .intro-text > section[data-theme="odd"]  { background-color: var(--bg-page); }
 .intro-text > section[data-theme="even"] { background-color: var(--bg-card); }
 
-.intro-text > section > * {
-    width: min(1400px, 90vw);
-}
 
-.intro-text > section#home > * {
-    width: min(1400px, 90vw);
-    padding: clamp(3rem, 6vw, 5rem) 0;
-}
 
 .intro-figure {
     background-color: #4228e0;
-    width: 600px;
+    width: clamp(280px, 35vw, 600px);
     min-width: 0;
     position: relative;
     pointer-events: none;
     display: flex;
     flex-direction: column;
+    position: relative;
+            outline: 2px solid rgb(195, 0, 255);
 }
 
 .scroll-figure-frame {
     background-color: #22C55E;
-    position: sticky;
-    top: var(--nav-height);
 
-    /*
-      ── TWEAK: frame height ──
-      Taller = more of your body visible.
-      Shorter = tighter crop (bust/head only).
-      Start at 550px and adjust.
-    */
-    height: 550px;
-
-    width: 100%;
+        width: 100%;
+    aspect-ratio: 6 / 6;
     overflow: hidden;
+
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: stretch;
+            outline: 2px solid rgb(255, 0, 149);
 
-    /*
-      ── TWEAK: vertical position of the frame within the column ──
-      Centers the frame within the hero section height.
-      Formula: (heroHeight - frameHeight) / 2
-      Adjust manually until it aligns with your text.
-    */
 }
 
 .scroll-figure-img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    /* adjust these two values only */
+    object-position: 60px 55%;
+
     display: block;
     flex-shrink: 0;
-    width: 100%;
-    height: auto;
 
-    /*
-      ── TWEAK: vertical shift of image inside frame ──
-      Negative = pulls image up (shows more of your upper body/head).
-      Current: -38% shows head + shoulders.
-      Make less negative (e.g. -25%) to show more chest/body.
-      Make more negative (e.g. -50%) to tighten on just the face.
-    */
+    transform-origin: center center;
+    will-change: transform;
 
-    transform-origin: center 25%;
-    transition: transform 0.1s ease-out;
     filter: drop-shadow(0 8px 32px rgba(91, 59, 255, 0.08));
 }
 
-@media (max-width: 860px) {
+.scroll-sticky {
+    position: sticky;
+    top: var(--nav-height);  /* Au lieu de top: 0 */
+    transform: translateY(0); /* Plus besoin de translate */
+}
+
+@media (max-width: 1000px) {
     #intro { display: block; }
     .intro-figure { display: none; }
 }
@@ -1216,6 +1207,11 @@ body::before {
 /* ═══════════════════════════════════════════════════════════════
     CONTACT CTA BAND
    ═══════════════════════════════════════════════════════════════ */
+
+    #contact {
+            padding: 0;
+    }
+
 
 .contact-cta {
     width: 100%;

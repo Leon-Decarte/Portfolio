@@ -33,20 +33,20 @@ function Home() {
                 #intro is position:relative — the figure column is
                 position:absolute inside it. No fixed positioning anywhere.
             */}
-            <div id="intro">
+            <section id="intro" data-theme="even">
                 {/* Left: hero + about. Right padding reserves space for the figure */}
                 <div className="intro-text">
-                    <section id="home" data-theme="odd">
+                    <section id="hero" >
                         <Hero />
                     </section>
-                    <section id="about" data-theme="even">
+                    <section id="about" >
                         <About />
                     </section>
                 </div>
 
                 {/* Figure: absolute column on the right, sticky frame inside */}
                 <ScrollFigure />
-            </div>
+            </section>
 
             <section id="skills" data-theme="odd">
                 <Skills />

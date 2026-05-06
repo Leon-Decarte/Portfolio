@@ -26,7 +26,7 @@ function Nav() {
     };
 
     const links = [
-        { label: "Home",     id: "home" },
+        { label: "Home", id: "hero" },
         { label: "About",    id: "about" },
         { label: "Skills",   id: "skills" },
         { label: "Projects", id: "projects-preview" },

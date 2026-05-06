@@ -200,6 +200,12 @@ body::before {
    HERO
    ═══════════════════════════════════════════════════════════════ */
 
+#hero{
+    min-height: calc(100vh - var(--nav-height));
+}
+
+
+
 .hero-layout {
     display: grid;
     gap: clamp(2rem, 5vw, 6rem);
@@ -240,9 +246,9 @@ body::before {
 
 /* Clip-reveal title lines */
 .hero-title {
-    font-size: var(--text-display);
+    font-size: 7rem;
     font-weight: 800;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.04em; 
     line-height: 1.05;
     color: var(--text-primary);
     margin: 0 0 1.5rem;
@@ -870,6 +876,7 @@ body::before {
     pointer-events: none;
     display: flex;
     flex-direction: column;
+    
 }
 
 .scroll-figure-frame {
@@ -891,7 +898,7 @@ body::before {
 .scroll-figure-img {
     width: 100%;
     height: 100%;
-
+    
     object-fit: cover;
 
     /* adjust these two values only */
@@ -904,6 +911,7 @@ body::before {
     will-change: transform;
 
     filter: drop-shadow(0 8px 32px rgba(91, 59, 255, 0.08));
+    
 }
 
 .scroll-sticky {
@@ -925,6 +933,8 @@ body::before {
         display: none;
     }
 }
+
+
 
 /* ═══════════════════════════════════════════════════════════════
     PROJECT CARDS — white card, image top, body below

@@ -5,8 +5,8 @@ function Hero() {
             <div className="hero-content">
                 <h1 className="hero-title reveal-up" data-delay="2">
                     I LISTEN<br />
-                    I DESIGN.<br />
-                    <em>I BUILD.</em>
+                    I DESIGN<br />
+                    <em>I BUILD</em>
                 </h1>
 
                 <p className="hero-subtitle reveal-up" data-delay="3">

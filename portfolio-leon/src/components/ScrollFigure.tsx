@@ -19,32 +19,32 @@ export default function ScrollFigure() {
         frames.forEach(src => { const img = new Image(); img.src = src; });
 
         const calculateProgress = () => {
-    // Récupère les éléments
-    const introFigure = document.querySelector(".intro-figure") as HTMLElement;
-    const scrollSticky = document.querySelector(".scroll-sticky") as HTMLElement;
-    
-    if (!introFigure || !scrollSticky) return 0;
-    
-    // Récupère les positions absolues dans la page
-    const introFigureTop = introFigure.offsetTop;
-    const introFigureHeight = introFigure.offsetHeight;
-    const stickyHeight = scrollSticky.offsetHeight;
-    
-    // Point de départ du sticky (quand il commence à être visible)
-    const startPoint = introFigureTop;
-    
-    // Point d'arrivée du sticky (quand son bas atteint le bas du parent)
-    const endPoint = introFigureTop + introFigureHeight - stickyHeight;
-    
-    // Position actuelle du scroll
-    const currentScroll = window.scrollY;
-    
-    // Calcul du progrès
-    let progress = (currentScroll - startPoint) / (endPoint - startPoint);
-    progress = Math.min(Math.max(progress, 0), 1);
-    
-    return progress;
-};
+            // Récupère les éléments
+            const introFigure = document.querySelector(".intro-figure") as HTMLElement;
+            const scrollSticky = document.querySelector(".scroll-sticky") as HTMLElement;
+
+            if (!introFigure || !scrollSticky) return 0;
+
+            // Récupère les positions absolues dans la page
+            const introFigureTop = introFigure.offsetTop;
+            const introFigureHeight = introFigure.offsetHeight;
+            const stickyHeight = scrollSticky.offsetHeight;
+
+            // Point de départ du sticky (quand il commence à être visible)
+            const startPoint = introFigureTop;
+
+            // Point d'arrivée du sticky (quand son bas atteint le bas du parent)
+            const endPoint = introFigureTop + introFigureHeight - stickyHeight;
+
+            // Position actuelle du scroll
+            const currentScroll = window.scrollY;
+
+            // Calcul du progrès
+            let progress = (currentScroll - startPoint) / (endPoint - startPoint);
+            progress = Math.min(Math.max(progress, 0), 1);
+
+            return progress;
+        };
 
         const updateAnimation = () => {
             const rawProgress = calculateProgress();
@@ -62,13 +62,16 @@ export default function ScrollFigure() {
             setFrameIndex(prev => prev === newIndex ? prev : newIndex);
 
             // Mise à jour scale (zoom progressif)
-            const ZOOM_MAX = 1.5;
-            const newScale = 1 + (ZOOM_MAX - 1) * progress;
+            const ZOOM_MAX = 1.6;
+            const BASE_SCALE = 1.15;
+
+            const newScale =
+                BASE_SCALE + (ZOOM_MAX - BASE_SCALE) * progress;
             setScale(newScale);
 
             rafRef.current = requestAnimationFrame(updateAnimation);
         };
-        
+
         const handleScroll = () => {
             if (rafRef.current) cancelAnimationFrame(rafRef.current);
             rafRef.current = requestAnimationFrame(updateAnimation);

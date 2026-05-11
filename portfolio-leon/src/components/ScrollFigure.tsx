@@ -63,7 +63,7 @@ export default function ScrollFigure() {
 
             // Mise à jour scale (zoom progressif)
             const ZOOM_MAX = 1.6;
-            const BASE_SCALE = 1.15;
+            const BASE_SCALE = 1.08;
 
             const newScale =
                 BASE_SCALE + (ZOOM_MAX - BASE_SCALE) * progress;
@@ -98,7 +98,7 @@ export default function ScrollFigure() {
                         alt="Scroll animation frame"
                         className="scroll-figure-img"
                         style={{
-                            transform: `scale(${scale})`,
+                            transform: `translateX(12%) scale(${scale})`,
                             transition: 'transform 0.05s linear'
                         }}
                     />

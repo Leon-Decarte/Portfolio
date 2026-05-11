@@ -202,6 +202,7 @@ body::before {
 
 #hero {
     min-height: calc(100vh - var(--nav-height));
+    align-items: center;
 }
 
 
@@ -797,19 +798,15 @@ body::before {
    ═══════════════════════════════════════════════════════════════ */
 
 #intro {
-
-    gap: clamp(2rem, 5vw, 6rem);
     position: relative;
     width: 100%;
-
     display: flex;
     justify-content: center;
     /* 1fr pour texte, largeur fixe pour image */
-    gap: clamp(2rem, 5vw, 6rem);
+    gap: clamp(2rem, 5vw, 4rem);
     align-items: stretch;
     /* Les deux colonnes auront la même hauteur */
     height: 100%;
-    border: #22bac5 2px solid;
 
 }
 
@@ -823,14 +820,11 @@ body::before {
     width: 100%;
     display: flex;
     justify-content: center;
-    border: #8cc522 2px solid;
-    
+    align-items: start;
 }
 
 
-
 #hero {
-
     padding-bottom: 8rem;
 }
 
@@ -847,13 +841,47 @@ body::before {
 .intro-figure {
     flex: 1;
     width: clamp(280px, 50vw, 600px);
+
     min-width: 0;
+
     position: relative;
-    pointer-events: none;
+
     display: flex;
     flex-direction: column;
-    position: relative;
-    border: #22C55E 2px solid;
+
+    pointer-events: none;
+
+    isolation: isolate;
+}
+
+.scroll-sticky:before {
+    content: "";
+
+    position: absolute;
+
+    width: 92%;
+    height: 72%;
+
+    left: 4%;
+    bottom: 0%;
+
+    background:     linear-gradient(
+        180deg,
+        rgba(91,59,255,0.92) 0%,
+        rgba(91,59,255,0.78) 100%
+    );
+
+    clip-path: polygon(
+            28% 45%,
+    72% 45%,
+    100% 100%,
+    0% 100%
+    );
+
+    z-index: 0;
+
+
+    opacity: 0.95;
 }
 
 
@@ -866,35 +894,16 @@ body::before {
 
 
 .scroll-figure-frame {
-
     width: 100%;
     aspect-ratio: 6 / 4;
     overflow: hidden;
-
     display: flex;
     justify-content: center;
     align-items: stretch;
     height: 60vh;
     position: relative;
-
 }
 
-.scroll-figure-frame::before {
-    content: "";
-
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    height: 60%;
-
-    
-
-    z-index: 0;
-
-    pointer-events: none;
-}
 
 .scroll-figure-img {
     width: 100%;
@@ -913,30 +922,23 @@ body::before {
     filter:
         saturate(0.9)
         contrast(1.05)
-        hue-rotate(-12deg);
-    opacity: 0.9;
+            brightness(1.2)
+
+        hue-rotate(-18deg);
+        
+    opacity: 1;
         position: relative;
     z-index: 1;
-    background:
-        linear-gradient(
-            to top,
-            rgba(91, 59, 255, 0.16),
-            rgba(91, 59, 255, 0.08),
-            transparent
-        );
+   
 }
 
 .scroll-sticky {
     position: sticky;
     top: var(--nav-height);
-    /* Au lieu de top: 0 */
-    transform: translateY(0);
-    /* Plus besoin de translate */
-    align-content: center;
-    border-radius: 16px;
-    overflow: hidden;
-    
+
 }
+
+
 
 @media (max-width: 1000px) {
     #intro {

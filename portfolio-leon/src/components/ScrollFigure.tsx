@@ -91,8 +91,8 @@ export default function ScrollFigure() {
 
     return (
         <div ref={containerRef} className="intro-figure reveal-up" data-delay="6">
-            <div className="scroll-sticky">
-                <div className="scroll-figure-frame">
+            <div className="scroll-sticky " >
+                <div className="scroll-figure-frame ">
                     <img
                         src={frames[frameIndex]}
                         alt="Scroll animation frame"

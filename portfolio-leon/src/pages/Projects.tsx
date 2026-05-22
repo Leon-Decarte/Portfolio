@@ -16,7 +16,7 @@ function ProjectCard({ project, featured = false, delay = 1 }: {
             </div>
             <div className="pcard-body">
                 <div className="pcard-body-top">
-                    
+
                     <h3 className="pcard-title">{project.hero.title}</h3>
                     <div className="pcard-body-meta">
                         <span className="pcard-cat">{project.category}</span>
@@ -25,23 +25,25 @@ function ProjectCard({ project, featured = false, delay = 1 }: {
                     <p className="pcard-desc">{project.hero.description}</p>
                 </div>
 
-                <div className="pcard-stack-row">
-                    {project.stack.map((tech) => (
-                        <span key={tech} className="pcard-tech">{tech}</span>
-                    ))}
-                </div>
+                <div className="pcard-body-bottom">
+                    <div className="pcard-stack-row">
+                        {project.stack.map((tech) => (
+                            <span key={tech} className="pcard-tech">{tech}</span>
+                        ))}
+                    </div>
 
-                <div className="pcard-actions">
-                    {project.hero.demoLink && (
-                        <a href={project.hero.demoLink} target="_blank" rel="noopener noreferrer" className="pcard-cta">
-                            View project
-                        </a>
-                    )}
-                    {project.hero.githubLink && (
-                        <a href={project.hero.githubLink} target="_blank" rel="noopener noreferrer" className="pcard-cta pcard-cta--ghost">
-                            GitHub
-                        </a>
-                    )}
+                    <div className="pcard-actions">
+                        {project.hero.demoLink && (
+                            <a href={project.hero.demoLink} target="_blank" rel="noopener noreferrer" className="pcard-cta">
+                                View project
+                            </a>
+                        )}
+                        {project.hero.githubLink && (
+                            <a href={project.hero.githubLink} target="_blank" rel="noopener noreferrer" className="pcard-cta pcard-cta--ghost">
+                                GitHub
+                            </a>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
@@ -61,6 +63,7 @@ function Projects() {
             </div>
 
             {featured && <ProjectCard project={featured} featured delay={2} />}
+
 
             <div className="pcard-grid">
                 {visible.map((project, i) => (

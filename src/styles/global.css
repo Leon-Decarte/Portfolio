@@ -62,7 +62,7 @@ body::before {
 /* Each section stretches full viewport width */
 .home>section {
     width: 100%;
-    padding: var(--section-padding) 10vw;
+    padding: var(--section-padding) 16vw;
 }
 
 
@@ -892,7 +892,7 @@ body::before {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
-    margin-top: 2.5rem;
+    margin-top: 2rem;
     perspective: 1000px;
     /* keep this for your tilt */
 }
@@ -1158,7 +1158,7 @@ body::before {
 .projects-section {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 2rem;
     align-items: center;
 }
 
@@ -1170,7 +1170,7 @@ body::before {
 .pcard-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
+    gap: 2rem;
 }
 
 

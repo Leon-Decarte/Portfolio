@@ -50,7 +50,7 @@ export default function ScrollFigure() {
             const rawProgress = calculateProgress();
             // Lissage exponentiel pour une animation fluide
             targetProgressRef.current = rawProgress;
-            currentProgressRef.current = currentProgressRef.current * 0.92 + targetProgressRef.current * 0.08;
+            currentProgressRef.current = targetProgressRef.current;
 
             const progress = currentProgressRef.current;
 

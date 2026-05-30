@@ -1,7 +1,8 @@
-// ScrollFigure.tsx - Version améliorée
+// ScrollFigure.tsx - Stable version
 import { useEffect, useRef, useState } from "react";
 
 const TOTAL_FRAMES = 26;
+
 const frames = Array.from({ length: TOTAL_FRAMES }, (_, i) =>
     new URL(`../assets/editedFrames/f${i + 1}.png`, import.meta.url).href
 );
@@ -9,97 +10,97 @@ const frames = Array.from({ length: TOTAL_FRAMES }, (_, i) =>
 export default function ScrollFigure() {
     const [frameIndex, setFrameIndex] = useState(0);
     const [scale, setScale] = useState(1);
-    const containerRef = useRef<HTMLDivElement>(null);
-    const rafRef = useRef<number | null>(null);
-    const targetProgressRef = useRef(0);
-    const currentProgressRef = useRef(0);
 
+    const introRef = useRef<HTMLElement | null>(null);
+    const stickyRef = useRef<HTMLElement | null>(null);
+
+    const progressRef = useRef(0);
+
+    // ----------------------------
+    // Preload images (safe version)
+    // ----------------------------
     useEffect(() => {
-        // Préchargement des images
-        frames.forEach(src => { const img = new Image(); img.src = src; });
+        frames.forEach((src) => {
+            const img = new Image();
+            img.src = src;
+        });
+    }, []);
 
-        const calculateProgress = () => {
-            // Récupère les éléments
-            const introFigure = document.querySelector(".intro-figure") as HTMLElement;
-            const scrollSticky = document.querySelector(".scroll-sticky") as HTMLElement;
+    // ----------------------------
+    // Progress calculation
+    // ----------------------------
+    const calculateProgress = () => {
+        if (!introRef.current || !stickyRef.current) return 0;
 
-            if (!introFigure || !scrollSticky) return 0;
+        const intro = introRef.current;
+        const sticky = stickyRef.current;
 
-            // Récupère les positions absolues dans la page
-            const introFigureTop = introFigure.offsetTop;
-            const introFigureHeight = introFigure.offsetHeight;
-            const stickyHeight = scrollSticky.offsetHeight;
+        const start = intro.offsetTop;
+        const end = intro.offsetTop + intro.offsetHeight - sticky.offsetHeight;
 
-            // Point de départ du sticky (quand il commence à être visible)
-            const startPoint = introFigureTop;
+        const scroll = window.scrollY;
 
-            // Point d'arrivée du sticky (quand son bas atteint le bas du parent)
-            const endPoint = introFigureTop + introFigureHeight - stickyHeight;
+        const progress = (scroll - start) / (end - start);
 
-            // Position actuelle du scroll
-            const currentScroll = window.scrollY;
+        return Math.min(1, Math.max(0, progress));
+    };
 
-            // Calcul du progrès
-            let progress = (currentScroll - startPoint) / (endPoint - startPoint);
-            progress = Math.min(Math.max(progress, 0), 1);
+    // ----------------------------
+    // Update animation
+    // ----------------------------
+    const update = () => {
+        const progress = calculateProgress();
+        progressRef.current = progress;
 
-            return progress;
-        };
+        const frame = Math.min(
+            TOTAL_FRAMES - 1,
+            Math.floor(progress * (TOTAL_FRAMES - 1))
+        );
 
-        const updateAnimation = () => {
-            const rawProgress = calculateProgress();
-            // Lissage exponentiel pour une animation fluide
-            targetProgressRef.current = rawProgress;
-            currentProgressRef.current = targetProgressRef.current;
+        setFrameIndex(frame);
 
-            const progress = currentProgressRef.current;
+        const ZOOM_MAX = 1.6;
+        const BASE_SCALE = 1.08;
 
-            // Mise à jour frame index
-            const newIndex = Math.min(
-                Math.floor(progress * TOTAL_FRAMES),
-                TOTAL_FRAMES - 1
-            );
-            setFrameIndex(prev => prev === newIndex ? prev : newIndex);
+        setScale(BASE_SCALE + (ZOOM_MAX - BASE_SCALE) * progress);
+    };
 
-            // Mise à jour scale (zoom progressif)
-            const ZOOM_MAX = 1.6;
-            const BASE_SCALE = 1.08;
+    // ----------------------------
+    // Effects
+    // ----------------------------
+    useEffect(() => {
+        introRef.current = document.querySelector(".intro-figure");
+        stickyRef.current = document.querySelector(".scroll-sticky");
 
-            const newScale =
-                BASE_SCALE + (ZOOM_MAX - BASE_SCALE) * progress;
-            setScale(newScale);
+        const onScroll = () => requestAnimationFrame(update);
+        const onResize = () => update();
 
-            rafRef.current = requestAnimationFrame(updateAnimation);
-        };
+        window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", onResize);
 
-        const handleScroll = () => {
-            if (rafRef.current) cancelAnimationFrame(rafRef.current);
-            rafRef.current = requestAnimationFrame(updateAnimation);
-        };
-
-        window.addEventListener("scroll", handleScroll, { passive: true });
-        window.addEventListener("resize", handleScroll);
-
-        handleScroll(); // Initialisation
+        // initial run (important for correct first frame)
+        update();
 
         return () => {
-            window.removeEventListener("scroll", handleScroll);
-            window.removeEventListener("resize", handleScroll);
-            if (rafRef.current) cancelAnimationFrame(rafRef.current);
+            window.removeEventListener("scroll", onScroll);
+            window.removeEventListener("resize", onResize);
         };
     }, []);
 
+    // ----------------------------
+    // Render
+    // ----------------------------
     return (
-        <div ref={containerRef} className="intro-figure reveal-up" data-delay="6">
-            <div className="scroll-sticky " >
-                <div className="scroll-figure-frame ">
+        <div ref={introRef as any} className="intro-figure reveal-up" data-delay="6">
+            <div ref={stickyRef as any} className="scroll-sticky">
+                <div className="scroll-figure-frame">
                     <img
                         src={frames[frameIndex]}
                         alt="Scroll animation frame"
                         className="scroll-figure-img"
                         style={{
                             transform: `translateX(12%) scale(${scale})`,
-                            transition: 'transform 0.05s linear'
+                            willChange: "transform",
                         }}
                     />
                 </div>

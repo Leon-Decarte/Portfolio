@@ -1,4 +1,3 @@
-// ScrollFigure.tsx - Stable version
 import { useEffect, useRef, useState } from "react";
 
 const TOTAL_FRAMES = 26;
@@ -14,10 +13,12 @@ export default function ScrollFigure() {
     const introRef = useRef<HTMLElement | null>(null);
     const stickyRef = useRef<HTMLElement | null>(null);
 
-    const progressRef = useRef(0);
+    const targetProgress = useRef(0);
+    const smoothedProgress = useRef(0);
+    const rafRef = useRef<number | null>(null);
 
     // ----------------------------
-    // Preload images (safe version)
+    // Preload images
     // ----------------------------
     useEffect(() => {
         frames.forEach((src) => {
@@ -46,12 +47,19 @@ export default function ScrollFigure() {
     };
 
     // ----------------------------
-    // Update animation
+    // Smooth animation loop (IMPORTANT PART)
     // ----------------------------
-    const update = () => {
-        const progress = calculateProgress();
-        progressRef.current = progress;
+    const animate = () => {
+        // 1. get raw scroll progress
+        targetProgress.current = calculateProgress();
 
+        // 2. smooth it (THIS is your requested line, placed correctly)
+        smoothedProgress.current +=
+            (targetProgress.current - smoothedProgress.current) * 0.15;
+
+        const progress = smoothedProgress.current;
+
+        // 3. frame calculation
         const frame = Math.min(
             TOTAL_FRAMES - 1,
             Math.floor(progress * (TOTAL_FRAMES - 1))
@@ -59,10 +67,14 @@ export default function ScrollFigure() {
 
         setFrameIndex(frame);
 
+        // 4. scale animation
         const ZOOM_MAX = 1.6;
         const BASE_SCALE = 1.08;
 
         setScale(BASE_SCALE + (ZOOM_MAX - BASE_SCALE) * progress);
+
+        // 5. keep loop alive
+        rafRef.current = requestAnimationFrame(animate);
     };
 
     // ----------------------------
@@ -72,18 +84,31 @@ export default function ScrollFigure() {
         introRef.current = document.querySelector(".intro-figure");
         stickyRef.current = document.querySelector(".scroll-sticky");
 
-        const onScroll = () => requestAnimationFrame(update);
-        const onResize = () => update();
+        const onScroll = () => {
+            // DO NOT run update directly — only trigger RAF loop if needed
+            if (!rafRef.current) {
+                rafRef.current = requestAnimationFrame(animate);
+            }
+        };
+
+        const onResize = () => {
+            // optional: force recalculation
+            targetProgress.current = calculateProgress();
+        };
 
         window.addEventListener("scroll", onScroll, { passive: true });
         window.addEventListener("resize", onResize);
 
-        // initial run (important for correct first frame)
-        update();
+        // start animation loop once
+        rafRef.current = requestAnimationFrame(animate);
 
         return () => {
             window.removeEventListener("scroll", onScroll);
             window.removeEventListener("resize", onResize);
+
+            if (rafRef.current) {
+                cancelAnimationFrame(rafRef.current);
+            }
         };
     }, []);
 

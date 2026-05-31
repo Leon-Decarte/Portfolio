@@ -31,13 +31,13 @@ export interface Project {
 }
 
 import { kasaProject } from "./projects/kasa";
-import { project2 } from "./projects/project2";
+import { learnhome } from "./projects/learnhome";
 import { sportsee } from "./projects/sportsee";
 import { lespetitplat } from "./projects/lespetitplat";
 
 export const projectsData: Project[] = [
     kasaProject,
-    project2,
+    learnhome,
     sportsee,
     lespetitplat,
 ];

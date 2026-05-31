@@ -1,15 +1,15 @@
 import type { Project } from "../projects";
 
-export const project2: Project = {
+export const learnhome: Project = {
     id: "project-2",
     year: 2024,
     category: "dashboard",
     status: "completed",
 
     hero: {
-        title: "Project Title Here",
+        title: "Learn@home",
         description: "Brief description of your project.",
-        image: "/images/project2/hero.png",
+        image: "src/assets/learnhome/main.png",
         demoLink: "https://demo-link.com",
         githubLink: "https://github.com/username/project2",
     },

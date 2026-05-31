@@ -2,13 +2,14 @@ import { useState } from "react";
 import { projectsData } from "../data/projects";
 import type { Project } from "../data/projects";
 
-function ProjectCard({ project, featured = false, delay = 1 }: {
+function ProjectCard({ project, featured = false, delay = 1, reverse = false }: {
     project: Project;
     featured?: boolean;
     delay?: number;
+    reverse?: boolean;
 }) {
     return (
-        <div className={`pcard reveal-up${featured ? " pcard--featured" : ""}`} data-delay={String(delay)}>
+        <div className={`pcard reveal-up${featured ? " pcard--featured" : ""}${reverse ? " pcard--reverse" : ""}`} data-delay={String(delay)}>
             <div className="pcard-img-wrap">
                 <div className="pcard-img-inner">
                     <img src={project.hero.image} alt={project.hero.title} className="pcard-img" />
@@ -62,14 +63,12 @@ function Projects() {
                 <h2 className="section-heading">Projects</h2>
             </div>
 
-            {featured && <ProjectCard project={featured} featured delay={2} />}
+            {featured && <ProjectCard project={featured} featured delay={2} reverse={false} />}
 
+            {visible.map((project, i) => (
+                <ProjectCard key={project.id} project={project} featured delay={i + 3} reverse={((i + 1) % 2) === 1} />
+            ))}
 
-            <div className="pcard-grid">
-                {visible.map((project, i) => (
-                    <ProjectCard key={project.id} project={project} delay={i + 3} />
-                ))}
-            </div>
 
             {hiddenCount > 0 && (
                 <div className="project-more reveal-up" data-delay="4">

@@ -9,7 +9,7 @@ export const sportsee: Project = {
     hero: {
         title: "SportSee – Dashboard",
         description: "React dashboard application with data visualization.",
-        image: "src/assets/sportsee/main.png",
+        image: "sportsee/main.png",
         demoLink: "https://sportsee-dashboard.vercel.app",
         githubLink: "https://p12-sportsee-one.vercel.app/",
     },

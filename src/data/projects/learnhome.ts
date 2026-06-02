@@ -9,7 +9,7 @@ export const learnhome: Project = {
     hero: {
         title: "Learn@home",
         description: "Brief description of your project.",
-        image: "src/assets/learnhome/main.png",
+        image: "learnhome/main.png",
         demoLink: "https://demo-link.com",
         githubLink: "https://github.com/username/project2",
     },

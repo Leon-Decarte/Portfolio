@@ -10,9 +10,9 @@ function Hero() {
                 </h1>
 
                 <p className="hero-subtitle reveal-up" data-delay="3">
-                    React developer with a strong UX background, building clean,
+                    Fullstack developer with a strong UX/UI background, building clean,
                     intuitive interfaces backed by{" "}
-                    <strong>Java & Spring Boot</strong>.
+                    <strong>Javascript & Java</strong>.
                 </p>
 
                 <div className="hero-actions reveal-up" data-delay="4">

@@ -9,11 +9,10 @@ function ProjectCard({ project, featured = false, delay = 1, reverse = false }: 
     reverse?: boolean;
 }) {
     return (
-        <div className={`pcard reveal-up${featured ? " pcard--featured" : ""}${reverse ? " pcard--reverse" : ""}`} data-delay={String(delay)}>
+        <div className={`pcard .pcard--reverse reveal-up${featured ? " pcard--featured" : ""}${reverse ? " pcard--reverse" : ""}`} data-delay={String(delay)}>
             <div className="pcard-img-wrap">
-                <div className="pcard-img-inner">
                     <img src={project.hero.image} alt={project.hero.title} className="pcard-img" />
-                </div>
+
             </div>
             <div className="pcard-body">
                 <div className="pcard-body-top">

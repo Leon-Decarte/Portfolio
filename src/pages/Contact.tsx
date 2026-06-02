@@ -2,13 +2,11 @@ function Contact() {
     return (
         <div className="contact-cta">
             <div className="contact-cta-inner reveal-up" data-delay="1">
-                <span className="contact-cta-eyebrow">Available for work</span>
                 <h2 className="contact-cta-heading">
-                    Ready to build<br />something great?
+                    Ready to build<br />something great together?
                 </h2>
                 <p className="contact-cta-sub">
-                    Open to work-study opportunities and freelance projects.
-                    Let's talk about what we can create together.
+                    Looking forward to connecting! Feel free to reach out.
                 </p>
                 <div className="contact-cta-actions">
                     <a href="mailto:leondecarte@gmail.com" className="btn contact-btn-primary">

@@ -9,7 +9,7 @@ export const lespetitplat: Project = {
     hero: {
         title: "Les Petits Plats – Restaurant",
         description: "React application for a restaurant with menu and reservation features.",
-        image: "src/assets/Petit Plats/main.png",
+        image: "src/assets/petitplats/main.png",
         demoLink: "https://lespetitsplats-one.vercel.app/",
         githubLink: "https://github.com/Leon-Decarte/P7_les_petits_plats",
     },

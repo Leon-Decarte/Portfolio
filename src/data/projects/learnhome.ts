@@ -8,9 +8,9 @@ export const learnhome: Project = {
 
     hero: {
         title: "Learn@home",
-        description: "Brief description of your project.",
+        description: "Architected the functional scoping and agile framework for an educational platform using Figma and Notion. Delivered responsive wireframes, user stories with acceptance criteria, and a macro Kanban backlog to structure the development lifecycle.",
         image: "learnhome/main.png",
-        demoLink: "https://demo-link.com",
+        demoLink: "https://www.figma.com/proto/fb5AU3xMcPrfG3rx8r1S0A/Untitled?node-id=0-1&t=3E8eYguevwcwqgfw-1",
         githubLink: "https://github.com/username/project2",
     },
 

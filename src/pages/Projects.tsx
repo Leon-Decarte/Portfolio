@@ -18,10 +18,8 @@ function ProjectCard({ project, featured = false, delay = 1, reverse = false }: 
                 <div className="pcard-body-top">
 
                     <h3 className="pcard-title">{project.hero.title}</h3>
-                    <div className="pcard-body-meta">
                         <span className="pcard-cat">{project.category}</span>
                         <span className="pcard-yr">{project.year}</span>
-                    </div>
                     <p className="pcard-desc">{project.hero.description}</p>
                 </div>
 

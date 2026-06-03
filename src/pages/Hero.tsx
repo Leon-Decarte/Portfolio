@@ -11,7 +11,7 @@ function Hero() {
 
                 <p className="hero-subtitle reveal-up" data-delay="3">
                     Fullstack developer with a strong UX/UI background, building clean,
-                    intuitive interfaces backed by{" "}
+                    intuitive interfaces using{" "}
                     <strong>Javascript & Java</strong>.
                 </p>
 

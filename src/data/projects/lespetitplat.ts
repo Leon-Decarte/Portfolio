@@ -8,7 +8,7 @@ export const lespetitplat: Project = {
 
     hero: {
         title: "Les Petits Plats – Restaurant",
-        description: "React application for a restaurant with menu and reservation features.",
+        description: "Engineered an optimized recipe search engine in native JavaScript, comparing a functional programming approach against imperative loops. Conducted performance benchmarking to minimize algorithmic complexity ",
         image: "petitplats/main.png",
         demoLink: "https://lespetitsplats-one.vercel.app/",
         githubLink: "https://github.com/Leon-Decarte/P7_les_petits_plats",

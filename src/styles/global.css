@@ -429,7 +429,7 @@ body::before {
 
 /* Clip-reveal title lines */
 .hero-title {
-    font-size: 7rem;
+    font-size: clamp(1rem, 6vw, 7rem);
     font-weight: 800;
     letter-spacing: -0.04em;
     line-height: 1.05;
@@ -496,16 +496,9 @@ body::before {
     flex-wrap: wrap;
 }
 
-@media (max-width: 1330px) {
-    .hero-title {
-        font-size: 6rem;
-    }
-}
+
 
 @media (max-width: 1140px) {
-    .hero-title {
-        font-size: 5rem;
-    }
 
     .hero-subtitle {
         font-size: var(--text-base);
@@ -1294,22 +1287,17 @@ display: flex;
 
 .pcard-yr {
     font-size: var(--text-label);
-    color: var(--text-muted);
+    color: var(--text-secondary);
     font-weight: 500;
 }
 
 .pcard-title {
-    font-size: var(--text-xl);
+    font-size: 24px;
     font-weight: 700;
-    letter-spacing: -0.02em;
-    color: var(--text-primary);
-    margin: 0;
-    line-height: 1.2;
+
 }
 
-.pcard--featured .pcard-title {
-    font-size: var(--text-2xl);
-}
+
 
 .pcard-desc {
     font-size: var(--text-sm);

@@ -8,10 +8,10 @@ export const sportsee: Project = {
 
     hero: {
         title: "SportSee – Dashboard",
-        description: "React dashboard application with data visualization.",
+        description: "Developed a data-driven fitness analytics dashboard with React and Recharts, building complex data visualizations for desktop views. Standardized raw API responses using a decoupled service layer (Axios) and integrated a mock/live data switch for seamless testing.",
         image: "sportsee/main.png",
-        demoLink: "https://sportsee-dashboard.vercel.app",
-        githubLink: "https://p12-sportsee-one.vercel.app/",
+        demoLink: "https://p12-sportsee-one.vercel.app/",
+        githubLink: "https://github.com/Leon-Decarte/P12_Sportsee",
     },
 
     context: "Context and background of the project.",

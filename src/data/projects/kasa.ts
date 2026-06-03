@@ -9,7 +9,7 @@ export const kasaProject: Project = {
     hero: {
         title: "Kasa",
         description:
-            "React application with dynamic routing and reusable components.",
+            "Engineered a responsive React SPA from Figma designs using Vite and Sass. Bypassed backend delays by developing asynchronously against mock JSON schemas to deliver a production-ready interface ahead of API deployment.",
         image: "kasa/kasa.png",
         demoLink: "https://kasa-nine-rho.vercel.app",
         githubLink: "https://github.com/Leon-Decarte/P11_Kasa",

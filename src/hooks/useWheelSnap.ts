@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 
 export function useWheelSnap() {
     const isScrolling = useRef(false);
+    const scrollTimeoutRef = useRef<number | null>(null);
 
     useEffect(() => {
         const handleWheel = (e: WheelEvent) => {
@@ -25,7 +26,8 @@ export function useWheelSnap() {
 
                 const navHeight = 64;
                 const aboutTop = about.offsetTop - navHeight;
-
+                
+                // Scroll plus lent - durée augmentée
                 window.scrollTo({
                     top: aboutTop,
                     behavior: "smooth"
@@ -33,7 +35,7 @@ export function useWheelSnap() {
 
                 setTimeout(() => {
                     isScrolling.current = false;
-                }, 600);
+                }, 1000); // Attend 1 seconde avant de réactiver
             }
 
             // Si about est visible en haut de l'écran
@@ -44,7 +46,8 @@ export function useWheelSnap() {
 
                 const navHeight = 64;
                 const heroTop = hero.offsetTop - navHeight;
-
+                
+                // Scroll plus lent - durée augmentée
                 window.scrollTo({
                     top: heroTop,
                     behavior: "smooth"
@@ -52,7 +55,7 @@ export function useWheelSnap() {
 
                 setTimeout(() => {
                     isScrolling.current = false;
-                }, 600);
+                }, 1000); // Attend 1 seconde avant de réactiver
             }
         };
 
@@ -60,6 +63,7 @@ export function useWheelSnap() {
 
         return () => {
             window.removeEventListener("wheel", handleWheel);
+            if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
         };
     }, []);
 }

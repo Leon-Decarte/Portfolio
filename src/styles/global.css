@@ -505,6 +505,17 @@ body::before {
     }
 }
 
+
+/* Snap scroll - Animation fluide */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Optionnel : pour éviter les sauts pendant le scroll automatique */
+body {
+    overflow-x: hidden;
+}
+
 /* ═══════════════════════════════════════════════════════════════
    BUTTONS — simple, solid, no roll
    ═══════════════════════════════════════════════════════════════ */

@@ -80,6 +80,8 @@ export default function ScrollFigure() {
     // ----------------------------
     // Effects
     // ----------------------------
+
+    
     useEffect(() => {
         introRef.current = document.querySelector(".intro-figure");
         stickyRef.current = document.querySelector(".scroll-sticky");

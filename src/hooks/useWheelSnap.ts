@@ -1,7 +1,7 @@
 // hooks/useWheelSnap.ts
 import { useEffect, useRef } from "react";
 
-export function useWheelSnap() {
+export default function useWheelSnap() {
     const isScrolling = useRef(false);
     const scrollTimeoutRef = useRef<number | null>(null);
 

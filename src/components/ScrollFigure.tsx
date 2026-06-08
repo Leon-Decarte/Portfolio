@@ -11,9 +11,6 @@ export default function ScrollFigure() {
 
     const introRef = useRef<HTMLElement | null>(null);
     const stickyRef = useRef<HTMLElement | null>(null);
-    const targetProgress = useRef(0);
-    const smoothedProgress = useRef(0);
-    const rawProgressRef = useRef(0);
     const rafRef = useRef<number | null>(null);
 
     useEffect(() => {
@@ -32,48 +29,18 @@ export default function ScrollFigure() {
     };
 
     const animate = () => {
-        // 1. Progression brute réelle
-        let raw = calculateProgress();
+        // Progression brute, sans aucun lissage
+        const raw = calculateProgress();
 
-        // 2. Limitation de la variation brute par frame (empêche les sauts)
-        const MAX_RAW_DELTA = 0.05;
-        let rawDelta = raw - rawProgressRef.current;
-        if (Math.abs(rawDelta) > MAX_RAW_DELTA) {
-            rawDelta = Math.sign(rawDelta) * MAX_RAW_DELTA;
-        }
-        raw = rawProgressRef.current + rawDelta;
-        rawProgressRef.current = raw;
-
-        // 3. Détection changement de direction
-        const prevTarget = targetProgress.current;
-        const deltaRaw = raw - prevTarget;
-        const prevSmooth = smoothedProgress.current;
-        const directionChanged = (deltaRaw > 0 && prevTarget - prevSmooth < 0) ||
-                                 (deltaRaw < 0 && prevTarget - prevSmooth > 0);
-
-        if (directionChanged) {
-            targetProgress.current = raw;
-            smoothedProgress.current = raw;
-        } else {
-            const MAX_DELTA = 0.03;
-            let delta = raw - targetProgress.current;
-            if (Math.abs(delta) > MAX_DELTA) {
-                delta = Math.sign(delta) * MAX_DELTA;
-            }
-            targetProgress.current += delta;
-            smoothedProgress.current += (targetProgress.current - smoothedProgress.current) * 0.2;
-        }
-
-        const progress = Math.min(1, Math.max(0, smoothedProgress.current));
-
-        // Frame index
-        const newIndex = Math.min(TOTAL_FRAMES - 1, Math.floor(progress * (TOTAL_FRAMES - 1)));
+        // Frame index direct
+        const newIndex = Math.min(TOTAL_FRAMES - 1, Math.floor(raw * (TOTAL_FRAMES - 1)));
         setFrameIndex(newIndex);
 
-        // Zoom
+        // Zoom direct
         const ZOOM_MAX = 1.6;
         const BASE_SCALE = 1.08;
-        setScale(BASE_SCALE + (ZOOM_MAX - BASE_SCALE) * progress);
+        const newScale = BASE_SCALE + (ZOOM_MAX - BASE_SCALE) * raw;
+        setScale(newScale);
 
         rafRef.current = requestAnimationFrame(animate);
     };
@@ -81,7 +48,6 @@ export default function ScrollFigure() {
     useEffect(() => {
         introRef.current = document.querySelector(".intro-figure");
         stickyRef.current = document.querySelector(".scroll-sticky");
-        rawProgressRef.current = calculateProgress();
 
         const onScroll = () => {
             if (!rafRef.current) {
@@ -90,8 +56,7 @@ export default function ScrollFigure() {
         };
 
         const onResize = () => {
-            targetProgress.current = calculateProgress();
-            rawProgressRef.current = targetProgress.current;
+            // Rien de spécial
         };
 
         window.addEventListener("scroll", onScroll, { passive: true });

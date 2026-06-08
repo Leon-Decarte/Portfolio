@@ -7,11 +7,13 @@ import Hero from "./Hero";
 import Contact from "./Contact";
 import Projects from "./Projects";
 import ScrollFigure from "../components/ScrollFigure"; // adjust path if needed
+import useWheelSnap from "../hooks/useWheelSnap";
 
 function Home() {
     const location = useLocation();
     useScrollReveal();
-
+    useWheelSnap();
+    
     useEffect(() => {
         window.scrollTo(0, 0);
         if (location.state?.scrollTo) {

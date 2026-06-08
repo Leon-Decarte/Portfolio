@@ -1046,7 +1046,7 @@ body {
 .intro-figure {
     flex: 1;
     width: clamp(280px, 50vw, 600px);
-
+    
     min-width: 0;
 
     position: relative;
@@ -1057,6 +1057,7 @@ body {
     pointer-events: none;
 
     isolation: isolate;
+    padding-top: 0;
 }
 
 .scroll-sticky:before {
@@ -1153,6 +1154,11 @@ body {
     }
 }
 
+@media (min-width: 2100px) {
+  .intro-figure {
+    padding-top: 8vh;
+  }
+}
 
 
 /* ═══════════════════════════════════════════════════════════════

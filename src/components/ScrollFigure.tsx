@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 const TOTAL_FRAMES = 26;
 const frames = Array.from({ length: TOTAL_FRAMES }, (_, i) =>
@@ -6,15 +6,29 @@ const frames = Array.from({ length: TOTAL_FRAMES }, (_, i) =>
 );
 
 export default function ScrollFigure() {
-    const [frameIndex, setFrameIndex] = useState(0);
-    const [scale, setScale] = useState(1);
-
     const introRef = useRef<HTMLElement | null>(null);
     const stickyRef = useRef<HTMLElement | null>(null);
+    const imgRef = useRef<HTMLImageElement>(null);
     const rafRef = useRef<number | null>(null);
+    const frameImagesRef = useRef<HTMLImageElement[]>([]);
+    const lastIndexRef = useRef(0);
+    const lastScaleRef = useRef(1.08);
 
     useEffect(() => {
-        frames.forEach(src => { const img = new Image(); img.src = src; });
+        // Précharger toutes les images
+        const promises = frames.map(src => {
+            return new Promise<HTMLImageElement>((resolve) => {
+                const img = new Image();
+                img.onload = () => resolve(img);
+                img.src = src;
+            });
+        });
+        Promise.all(promises).then(images => {
+            frameImagesRef.current = images;
+            if (imgRef.current && images[0]) {
+                imgRef.current.src = images[0].src;
+            }
+        });
     }, []);
 
     const calculateProgress = () => {
@@ -29,18 +43,26 @@ export default function ScrollFigure() {
     };
 
     const animate = () => {
-        // Progression brute, sans aucun lissage
-        const raw = calculateProgress();
+        const progress = calculateProgress();
+        const newIndex = Math.min(TOTAL_FRAMES - 1, Math.floor(progress * (TOTAL_FRAMES - 1)));
+        const newScale = 1.08 + (1.6 - 1.08) * progress;
 
-        // Frame index direct
-        const newIndex = Math.min(TOTAL_FRAMES - 1, Math.floor(raw * (TOTAL_FRAMES - 1)));
-        setFrameIndex(newIndex);
+        // Changement de l'image uniquement si l'index a changé
+        if (newIndex !== lastIndexRef.current) {
+            const imgObj = frameImagesRef.current[newIndex];
+            if (imgObj && imgRef.current) {
+                imgRef.current.src = imgObj.src;
+                lastIndexRef.current = newIndex;
+            }
+        }
 
-        // Zoom direct
-        const ZOOM_MAX = 1.6;
-        const BASE_SCALE = 1.08;
-        const newScale = BASE_SCALE + (ZOOM_MAX - BASE_SCALE) * raw;
-        setScale(newScale);
+        // Changement du scale uniquement si différent (évite d'écrire sans arrêt)
+        if (Math.abs(newScale - lastScaleRef.current) > 0.001) {
+            if (imgRef.current) {
+                imgRef.current.style.transform = `translateX(12%) scale(${newScale})`;
+                lastScaleRef.current = newScale;
+            }
+        }
 
         rafRef.current = requestAnimationFrame(animate);
     };
@@ -56,12 +78,11 @@ export default function ScrollFigure() {
         };
 
         const onResize = () => {
-            // Rien de spécial
+            // Peut recalculer si besoin
         };
 
         window.addEventListener("scroll", onScroll, { passive: true });
         window.addEventListener("resize", onResize);
-
         rafRef.current = requestAnimationFrame(animate);
 
         return () => {
@@ -76,11 +97,11 @@ export default function ScrollFigure() {
             <div ref={stickyRef as any} className="scroll-sticky">
                 <div className="scroll-figure-frame">
                     <img
-                        src={frames[frameIndex]}
+                        ref={imgRef}
                         alt="Scroll animation frame"
                         className="scroll-figure-img"
                         style={{
-                            transform: `translateX(12%) scale(${scale})`,
+                            transform: "translateX(12%) scale(1.08)",
                             willChange: "transform",
                         }}
                     />
